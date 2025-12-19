@@ -121,7 +121,7 @@ function dealer(){
 		if (deck[2][i]==2){
 			if (document.getElementById("c_dealer0").dataset.cardId!=i){
 				document.getElementById("c_dealer1").src=deck[0][i];
-				break;//errado sla
+				break;
 			}
 		}
 	}
