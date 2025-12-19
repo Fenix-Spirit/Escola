@@ -1,0 +1,90 @@
+
+body{
+    background-color: #d3d3d3
+}
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #a8c7c0;
+}
+table{
+    box-shadow: rgba(0,0,0,0.5) 0 2px 4px;
+    border-radius: 5px;
+    border-collapse: collapse;
+}
+td,tr,th{
+    background-color: white;
+    border: 1px solid #c3c3c3;
+}
+th{
+    background-color: #e1dfdf;
+}
+.img_table{
+    width: 50%;
+    height: 50%;
+}
+footer{
+    background-color: #a8c7c0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+#resultado{
+    clear: both;
+    margin: auto;
+    width: 40%;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #e1dfdf;
+}
+form{
+    padding: 10px;
+    width: 50%;
+    border-radius: 5px;
+    background-color: #ffffff
+}
+#btn_calc{
+    background-color: aqua;
+    padding: 14px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+}
+#formulario{
+    margin-top: 20px;
+    margin-bottom: 100px;
+    float: right;
+}
+#tabela{
+    margin-top: 20px;
+    float: left;
+}
+#imagem_resultado{
+    max-width: 120px;
+    max-height: 120px;
+}
+#btn_calc:hover{
+    background-color: cornflowerblue;
+}
+@media (max-width: 768px){
+    #formulario{
+        display: flex;
+        justify-content: center;
+        margin-left: 25%;
+        margin-right: 25%;
+        width: 50%;
+        margin-bottom: 30px;
+    }
+    form{
+        width: 100%;
+    }
+    #resultado{
+        width: 70%;
+    }
+    #imagem_resultado{
+        max-width: 60px;
+        max-height: 60px;
+    }
+}

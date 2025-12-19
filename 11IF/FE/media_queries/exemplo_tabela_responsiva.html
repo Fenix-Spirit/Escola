@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabela Responsiva</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        padding: 10px;
+      }
+
+      td {
+        position: relative;
+        padding-left: 50%;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        font-weight: bold;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Tabela Responsiva</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Cidade</th>
+        <th>País</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Nome">João Silva</td>
+        <td data-label="Email">joao@email.com</td>
+        <td data-label="Telefone">912345678</td>
+        <td data-label="Cidade">Porto</td>
+        <td data-label="País">Portugal</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

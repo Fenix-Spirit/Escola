@@ -1,0 +1,30 @@
+root{
+    --bg_color: #FFF9ED;
+    --bg_color_nav:#CFCF9F;
+    --bg_color_header:#ABAB7E;
+    --txt_color: #262621;
+}
+[data-theme="dark"] {
+    --bg_color: #262621;
+    --txt_color: #FFF9ED;
+    --bg_color_nav:#3B3B2A;
+    --bg_color_header:#29291A;
+}
+body{
+    background-color: var(--bg_color);
+    color: var(--txt_color);
+}
+header,nav,main,footer{
+    margin: auto;
+}
+header{
+    background-color: var(--bg_color_header);
+    text-align: center;
+}
+nav{
+    background-color: var(--bg_color_nav);
+    text-align: center;
+}
+main{}
+footer{}
+.btn_theme{}

@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modo Claro e Escuro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Estilo padrão (modo claro) */
+    body {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* Estilo para utilizadores com modo escuro ativo */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: #f0f0f0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Exemplo de Modo Claro e Escuro</h1>
+  <p>
+    Este site adapta automaticamente o seu estilo ao modo claro ou escuro definido no sistema do utilizador.
+    Experimenta mudar o tema do teu sistema operativo ou navegador para ver o efeito.
+  </p>
+</body>
+</html>

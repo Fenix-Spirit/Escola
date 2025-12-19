@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pamela Anderson Fan club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Fan club da Pamela Anderson</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#cards_pamela">Carreira</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#imagens_pamela">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contactos">Contactos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="imagens_pamela" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#imagens_pamela" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#imagens_pamela" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#imagens_pamela" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img  src="https://wwd.com/wp-content/uploads/2024/11/pamela-anderson-through-the-years-gallery-fi.jpg?w=1000&h=563&crop=1" class="d-block w-100 img-fluid" alt="imagem pamela andeson 1">
+        </div>
+        <div class="carousel-item">
+            <img src="https://wwd.com/wp-content/uploads/2025/08/MixCollage-11-Aug-2025-10-51-AM-4491.jpg?w=1000&h=563&crop=1" class="d-block w-100 img-fluid" alt="imagem pamela andeson 2">
+        </div>
+        <div class="carousel-item">
+            <img   src="https://people.com/thmb/YotzdE3HF0DG3A7QRdjbLc8_ocU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(948x292:950x294)/pamela-anderson-armani-fashion-show-101824-7576473a449b4b43a30eb798bde924bc.jpg" class="d-block w-100 img-fluid" alt="imagem pamela andeson 3">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#imagens_pamela" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#imagens_pamela" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="row d-flex justify-content-center mb-5" id="cards_pamela">
+    <div class="card row m-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Vida pessoal</h5>
+            <p class="card-text">Pequeno resumo da vida da celebridade.</p>
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vida">Ler</a>
+        </div>
+    </div>
+    <div class="card row m-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Prémios e indicações</h5>
+            <p class="card-text">Lista de prémios e indicações recebidas.</p>
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#premios">Ler</a>
+        </div>
+    </div>
+    <div class="card row m-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Carreira</h5>
+            <p class="card-text">Momentos de interesse da carreira</p>
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#carreira">Ler</a>
+        </div>
+    </div>
+</div>
+
+<div class="bg-body-tertiary p-4" id="contactos">
+    <form>
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" placeholder="Nome">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="name@exemplo.com">
+        </div>
+        <div class="mb-3">
+            <label for="assunto" class="form-label">Assunto</label>
+            <input type="text" class="form-control" id="assunto" placeholder="Assunto">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Escreva a sua mensagem! </label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <input class="btn btn-primary mb-3" type="submit" value="Enviar">
+    </form>
+</div>
+
+<div class="container bg-body-secondary">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-3 d-flex align-items-center">
+            <span class="text-muted">© 2025 Fan Club da Pamela Anderson</span>
+        </div>
+        <div class="col-md-3 d-flex align-items-center justify-content-between">
+            <a href=""><span class="text-muted">Instagram</span></a>
+            <a href=""><span class="text-muted">X</span></a>
+            <a href=""><span class="text-muted">Facebook</span></a>
+        </div>
+    </footer>
+</div>
+
+
+<div class="modal fade" id="vida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="vida_titulo">Vida</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Nascida no dia 1 de julho de 1967. Pamela Anderson foi conhecida por seus diversos relacionamentos amorosos com atores, cantores e modelos, de 1995 a 1998 foi casada com Tommy Lee, o baterista dos Mötley Crüe, com quem teve dois filhos: Brandon Thomas Anderson Lee, nascido em 5 de junho de 1996, e Dylan Jagger Anderson Lee, nascido em 29 de dezembro de 1997. Ambos os filhos nasceram de cesariana, em Malibu, na Califórnia. Ambos os rapazes são músicos. O matrimônio de Pamela e Tommy foi bastante complicado, devido às traições e humilhações por parte de Tommy. O casal foi capa frequente dos tabloides, devido a problemas de Lee com drogas, que resultaram em violência conjugal.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="premios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="premios_titulo">Prémios e indicações</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apesar de não ter ganho nenhum prémio Pamela foi indicada em 2025 para um Globo de Ouro e para um SAG award.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="carreira" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="carreira_titulo">Carreira</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                A vida de Pamela mudou aos 20 anos, em 1987, durante uma partida de futebol no seu país natal, quando uma das câmaras do estádio focou no seu rosto, e deu-lhe um grande plano. A partir daí, devido a sua beleza e sensualidade, foi contratada como modelo fotográfica por uma empresa de lingerie, para posar para os seus catálogos. A partir daí, paralelo à carreira de modelo, começou a estudar teatro, formando-se como atriz, fazendo participações em filmes, séries e peças. Apesar disto, os seus trabalhos no cinema foram mal sucedidos em termos comerciais, destacando-se Barbwire
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

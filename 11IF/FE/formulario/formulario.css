@@ -1,0 +1,25 @@
+body{
+    background-color: #f5a79c;
+}
+div.form-container{
+    box-shadow: rgba(249, 222, 134, 0.72) 0 2px 4px ;
+    border-radius: 20px;
+    background-color: #c12828;
+    padding: 20px;
+    margin: auto;
+    width: 15%;
+    text-align: center;
+}
+.input{
+    border-radius: 8px;
+    background-color: #3c031a;
+    color: #F9DE86B7;
+}
+label{display: block}
+button{
+    color: #F9DE86B7;
+    background-color: #3C031AFF ;
+    display: block;
+    margin: auto;
+}
+incompleto

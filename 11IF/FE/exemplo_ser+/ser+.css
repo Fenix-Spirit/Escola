@@ -1,0 +1,13 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    background-color: #c797c7;
+}
+img{
+    padding: 20px;
+}
+.conteudo-principal{
+    display:flex;
+    flex-direction: row;
+
+}

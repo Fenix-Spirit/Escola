@@ -1,0 +1,17 @@
+h1:hover {
+    color: green;
+}
+.container{
+}
+a:link {
+    color: #9b2a10;
+}
+a:visited {
+    color: #6f9b10;
+}
+a{
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}

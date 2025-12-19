@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo Completo de HTML Semântico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header, nav, main, section, article, aside, footer, figure {
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+    header {
+      background-color: #000000;
+      color: white;
+    }
+    nav {
+      background-color: #cfcfcf;
+    }
+    main {
+      background-color: #f9f9f9;
+    }
+    aside {
+      background-color: #f0f0f0;
+    }
+    footer {
+      background-color: #000000;
+      color: white;
+      text-align: center;
+    }
+    figure {
+      margin: 0;
+    }
+    figcaption {
+      font-style: italic;
+      font-size: 0.9em;
+    }
+
+      img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
+
+nav ul {
+  list-style: none;       /* Remove os marcadores da lista */
+  padding: 0;
+  margin: 0;
+  display: flex;          /* Alinha os itens horizontalmente */
+  gap: 20px;              /* Espaço entre os itens */
+  justify-content:center;
+
+}
+
+nav li {
+  display: inline;        /* Alternativa ao flex, se necessário */
+}
+
+nav a {
+  text-decoration: none;  /* Remove sublinhado */
+  color: #004080;         /* Cor do texto */
+  font-weight: bold;
+}
+
+nav a:hover {
+  background-color: #ffffff; /* Cor ao passar o rato */
+}
+
+
+  </style>
+
+  
+
+  
+</head>
+<body>
+  <header>
+    <h1>Portal de Notícias</h1>
+    <p>Bem-vindo ao nosso portal informativo em português de Portugal.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#noticias">Notícias</a></li>
+      <li><a href="#artigos">Artigos</a></li>
+      <li><a href="#contactos">Contactos</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="noticias">
+      <h2>Últimas Notícias</h2>
+      <article>
+        <h3>Nova medida ambiental aprovada</h3>
+        <p>O governo aprovou uma nova legislação para proteger os recursos naturais.</p>
+        <figure>
+          <img src="imagens/29267.jpg" alt="Imagem de natureza">
+          <figcaption>Imagem ilustrativa da nova medida ambiental.</figcaption>
+        </figure>
+      </article>
+      <article>
+        <h3>Evento cultural no centro da cidade</h3>
+        <p>Este fim de semana decorre um festival de música e arte com entrada gratuita.</p>
+      </article>
+    </section>
+
+    <section id="artigos">
+      <h2>Artigos em Destaque</h2>
+      <article>
+        <h3>Como melhorar a produtividade</h3>
+        <p>Dicas práticas para organizar melhor o seu tempo e tarefas diárias.</p>
+      </article>
+    </section>
+  </main>
+
+  <aside>
+    <h3>Informações Adicionais</h3>
+    <p>Subscreva a nossa newsletter para receber atualizações semanais.</p>
+  </aside>
+
+  <footer>
+    <p>&copy; 2025 Portal de Notícias. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

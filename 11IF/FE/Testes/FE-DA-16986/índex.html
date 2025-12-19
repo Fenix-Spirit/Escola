@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="PT-pt">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Simulador de poupanças inteligentes</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <script type="text/javascript" src="js/script.js"></script>
+    <header>Simulador de Poupança</header>
+    <main>
+        <div id="tabela">
+            <table>
+                <tr>
+                    <th>Classificação do prazo</th>
+                    <th>Tempo</th>
+                    <th>Imagem</th>
+                </tr>
+                <tr>
+                    <td>Curto Prazo</td>
+                    <td>Até 6 meses</td>
+                    <td><img src="imagens/curto.png" alt="curto" class="img_table"></td>
+                </tr>
+                <tr>
+                    <td>Médio Prazo</td>
+                    <td>7 a 24 meses</td>
+                    <td><img src="imagens/medio.png" alt="medio" class="img_table"></td>
+                </tr>
+                <tr>
+                    <td>Longo Prazo</td>
+                    <td>Mais de 24 meses</td>
+                    <td><img src="imagens/longo.png" alt="longo" class="img_table"></td>
+                </tr>
+            </table>
+        </div>
+        <div id="formulario">
+            <form>
+                <h2>Calcular Tempo de poupança</h2>
+                <label for="objetivo">Objetivo da Poupança(€)</label>
+                <input id="objetivo">
+                <br>
+                <label for="valor_mensal">Valor Mensal(€)</label>
+                <input id="valor_mensal">
+                <br>
+                <input id="btn_calc" type="button" value="Calcular Tempo" onclick="calcularTempo()">
+            </form>
+        </div>
+        <div id="resultado">
+            <h2 id="res">Resultado</h2>
+            <p id="txt_resultado"></p>
+            <h2 id="meses"></h2>
+            <img src="" id="imagem_resultado" alt="tempo_resultado" hidden="hidden">
+        </div>
+    </main>
+    <footer>Teste DA e FE 11ºIF</footer>
+</body>
+</html>

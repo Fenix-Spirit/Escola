@@ -1,0 +1,13 @@
+#topicos_mobile{
+    display: none;
+}
+@media  screen and (max-width: 700px) {
+    #carouselTopicos{
+        display: none;
+    }
+    #topicos_mobile{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}

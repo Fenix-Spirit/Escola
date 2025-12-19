@@ -1,0 +1,57 @@
+/* Estilo 1: Seletor de Etiqueta (body) - Define o tipo de letra e cor de fundo global */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Fonte moderna e limpa */
+    background-color: #bebec6; /* Fundo cinzento muito claro */
+    line-height: 1.6; /* Aumenta o espaço entre linhas para melhor leitura */
+    color: #333; /* Cor escura para o texto principal */
+    margin: 0; /* Remove a margem padrão do navegador */
+}
+/* Estilo 2: Seletor de Etiqueta (a) - Estiliza as hiperligações */
+a {
+    color: #a8c7c0; /* Azul vibrante para os links */
+    text-decoration: none; /* Remove o sublinhado padrão dos links */
+    padding: 8px 15px;
+    border: 1px solid #a8c7c0;
+    border-radius: 4px; /* Cantos ligeiramente arredondados */
+    display: inline-block; /* Permite definir padding e border corretamente */
+    margin-top: 15px;
+}
+/* Estilo 3: Seletor de Etiqueta (h2) */
+h2 {
+    color: #5a5a5a;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+/* Estilo 4: Seletor de ID (#) - Estiliza o cabeçalho */
+#cabecalho {
+    background-color: #343a40; /* Fundo cinzento escuro */
+    color: #a8c7c0; /* Texto branco */
+    padding: 20px 0; /* Espaçamento interno em cima e em baixo */
+    text-align: center; /* Centrar o texto */
+    margin-bottom: 30px; /* Margem exterior por baixo */
+}
+/* Estilo 5: Estiliza o conteúdo principal */
+.conteudo-principal {
+    width: 50%; /* Ocupa 80% da largura da janela */
+    margin: 0 auto; /* Centra o bloco na página (graças ao 'width' definido) */
+    padding: 20px;
+    background-color: white; /* Fundo branco para a secção */
+    box-shadow: 0 4px 8px rgba(0, 255, 0, 0.2); /* Sombra suave para o destacar */
+    border-radius: 8px; /* Cantos arredondados */
+}
+/* Estilo 6: Seletor de Classe (.) - Estiliza o parágrafo de destaque */
+.destaque {
+    background-color: #596f2f; /* Cor de fundo amarela suave */
+    color: #a2c583; /* Texto castanho para contraste */
+    padding: 15px;
+    border-left: 5px solid #a9bb7d; /* Borda laranja à esquerda */
+    margin: 20px 0;
+}
+/* Estilo 7: Estiliza o rodapé */
+footer {
+    background-color: #ccc;
+    color: #333;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 130px;
+}

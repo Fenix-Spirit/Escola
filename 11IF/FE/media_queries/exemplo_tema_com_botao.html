@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alternar Tema Claro/Escuro</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+    }
+
+    [data-theme='dark'] {
+      --bg-color: #121212;
+      --text-color: #f0f0f0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Alternar entre Modo Claro e Escuro</h1>
+  <p>
+    Este exemplo permite alternar manualmente entre os modos claro e escuro, além de respeitar a preferência do sistema.
+  </p>
+  <button onclick="alternarTema()">Alternar Tema</button>
+
+  <script>
+    // Detectar preferência do sistema
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    function alternarTema() {
+      const temaAtual = document.documentElement.getAttribute('data-theme');
+      const novoTema = temaAtual === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', novoTema);
+    }
+  </script>
+</body>
+</html>
