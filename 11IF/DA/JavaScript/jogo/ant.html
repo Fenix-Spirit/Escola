@@ -1,0 +1,90 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Movimento</title>
+</head>
+
+<body onkeyup="mover(event);"  onload="gera();" >
+<div id="demo"></div>
+<h1 id="m" onclick="st++;"> + </h1><h1 id="l" onclick="st--;"> - </h1>
+<script>
+var x=400;
+var y=800;
+var st=5;
+var timer=setInterval(movimenta,50);
+var tecla;
+
+
+
+function gera()
+{
+	py=Math.floor(Math.random()*screen.width);
+	px=Math.floor(Math.random()*(screen.height-200));
+	document.getElementById('sug').style.top=px +'px';
+	document.getElementById('sug').style.left=py +'px';
+}
+
+
+function movimenta()
+{
+	//movimentar o objeto
+	switch(tecla)
+	{
+		case 38: 
+			if(x>0)
+				x-=st;
+			break;
+		case 40: 
+			if(x<screen.height)
+				x+=st;
+			break;
+		case 37: 
+			if(y>0)
+				y-=st;
+			break;
+		case 39: 
+			if(y<screen.width)
+			y+=st;break;
+	}
+	 
+	document.getElementById('ant').style.top=x +'px';
+	document.getElementById('ant').style.left=y +'px';
+	if (x>(px-80) && x<(px) && y>py && y<(py+80))
+	{
+		clearInterval(timer);
+		alert('GANHOU');
+	}
+	
+	
+}
+
+
+function mover(t)
+{
+	// Quando é pressionada uma tecla, verificar e determinar o código da tecla
+	var unicode=t.keyCode? t.keyCode : t.charCode;
+	tecla=unicode;
+	document.getElementById("demo").innerHTML=tecla;
+}
+
+
+function showCoords(event) {
+  let x = event.screenX;  
+  let y = event.screenY;
+  let text = "X coords: " + x + ", Y coords: " + y;
+
+  document.getElementById("demo").innerHTML = text;
+}
+
+function bt(event) {
+  let text = "You pressed button: " + event.button;
+  document.getElementById("demo").innerHTML = text;
+}
+</script>
+<img id="ant" src="ant.jpg" width="80" height="77" style="position:absolute;top:400px;left:800px;" />
+<img id="sug" src="sugar.jpg"  style="position:absolute;" onmousemove="showCoords(event);" onmousedown="bt(event)"/>
+
+
+</body>
+</html>

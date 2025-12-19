@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Horas</title>
+    <style>
+        #img{
+            margin: auto;
+            width: 20%;
+            height: 20%;
+        }
+        h1{
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Relógio Digital</h2>
+        <h1 id="horas"></h1>
+        <img src="Files/stop.png" id="img" alt="img">
+        <h2>Cronómetro online</h2>
+        <h1 id="cronometro">00:00:00</h1>
+        <audio id="audio" src="Files/getready.mp3" ></audio>
+        <button id="iniciar" onclick=iniciar()>Iniciar</button>
+        <button id="stop" disabled="disabled" onclick="stop()">Parar</button>
+        <button id="reg" onclick="registar()" disabled="disabled">Registar</button>
+        <button onclick=zerar()>Limpar o cronómetro</button>
+        <div id="registos"></div>
+    </div>
+    <script>
+		function check(i){
+			if (i<10){i="0"+i}
+			return i;
+		}
+		function horas(){
+			let now= new Date()
+			let h=now.getHours();
+			let m=now.getMinutes();
+			let s=now.getSeconds();
+			m=check(m)
+            s=check(s)
+			document.getElementById("horas").innerHTML=h+":"+m+":"+s;
+			setTimeout(horas,1000)
+
+		}
+		let now= new Date()
+		let h=now.getHours();
+		let m=now.getMinutes();
+		let s=now.getSeconds();
+		m=check(m)
+		s=check(s)
+		document.getElementById("horas").innerHTML=h+":"+m+":"+s;
+		setInterval(horas,1000);
+		let audio=document.getElementById("audio");
+		let cr_s=0;
+		let cr_m=0;
+		let cr_ms=0;
+		let id_ms=0;
+		let id_s=0;
+		let id_m=0;
+		let cr_on=false
+        let count=0
+		function seg(){
+			cr_s++;
+            cr_s=check(cr_s);
+			if(cr_s>=60){
+				cr_s=0;
+			}
+        }
+		function min(){
+			cr_m++;
+			cr_m=check(cr_m);
+        }
+        function ms(){
+			cr_ms++;
+			if(cr_ms>=100){
+				cr_ms=0
+			}
+			document.getElementById("cronometro").innerHTML=cr_m+":"+cr_s+":"+cr_ms;
+        }
+
+
+		function cronometro(){
+			cr_on=true;
+            document.getElementById("stop").disabled = false;
+            document.getElementById("reg").disabled = false;
+			document.getElementById("img").src = "Files/go.png";
+            id_ms=setInterval(ms,10);
+			id_s=setInterval(seg,1000);
+			id_m=setInterval(min,60000);
+		}
+		function iniciar(){
+			audio.play()
+            setTimeout(cronometro,3000)
+            document.getElementById("iniciar").disabled=true;
+        }
+		function stop(){
+			cr_on=false;
+			clearInterval(id_ms)
+            clearInterval(id_s)
+            clearInterval(id_m)
+            document.getElementById("iniciar").disabled=false;
+			document.getElementById("stop").disabled=true;
+			document.getElementById("reg").disabled=true;
+			document.getElementById("img").src="Files/stop.png";
+        }
+		function zerar(){
+			if (cr_on){
+				clearInterval(id_ms)
+				clearInterval(id_s)
+				clearInterval(id_m)
+				cr_s=0;
+				cr_m=0;
+				cr_ms=0;
+				cronometro()
+            }
+			else{
+				cr_s=0;
+				cr_m=0;
+				cr_ms=0;
+				document.getElementById("cronometro").innerHTML="00:00:00";
+            }
+        }
+		function registar(){
+            let x=document.getElementById("registos");
+			let y=cr_m+':'+cr_s+':'+cr_ms;
+			x.innerHTML+="<p id='reg_"+count+"'></p>";
+			document.getElementById("reg_"+count).innerHTML=y;
+			count++
+        }
+    </script>
+</body>
+</html>

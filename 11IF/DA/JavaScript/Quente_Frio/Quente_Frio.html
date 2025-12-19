@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quente ou Frio</title>
+    <style>
+        .certo{
+            background-color: #7ff934;
+        }
+        .frio{
+            background-color: #60a9c7;
+        }
+        .morno{
+            background-color: #f97634;
+        }
+        .quente{
+            background-color: #ff1100;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        var num;
+        var ct=0
+        var limite
+        function gerar_numero() {
+            limite = parseInt(document.getElementById('limite').value);
+            if (limite > 500 || limite < 30) {
+                alert("O limite tem de ser [30,500]");
+            } else {
+                num = Math.floor(Math.random() * (limite - 30)) + 30;
+                console.log(num);
+                document.getElementById('limite').disabled = "disabled";
+                document.getElementById('definir_limite').disabled = "disabled";
+                document.getElementById('tentativa').disabled = "";
+                document.getElementById('tentar').disabled = "";
+                document.getElementById('tentativas_feitas').innerHTML = ""
+            }
+        }
+        function verificar(){
+            t=parseInt(document.getElementById('tentativa').value);
+            if(t>=30 && t<=500){
+                ct++;
+                document.getElementById('tentativa').value="";
+
+                if(Math.abs(t-num)==0){
+
+                    x="Parabéns, acertou. " + ct + " tentativas";
+                    color_code="certo";
+                    document.getElementById('tentativa').disabled="disabled";
+                    document.getElementById('tentar').disabled="disabled";
+                    document.getElementById('limite').disabled="";
+                    document.getElementById('definir_limite').disabled="";
+                    document.getElementById('limite').value="";
+                    document.getElementById('imagem').src='img/ok.png';
+                    ct=0;
+                }
+                else
+                if(Math.abs(t-num)>20)
+                {
+                    x="Frio";
+                    color_code="frio";
+                    document.getElementById('imagem').src='img/frio.png';
+                }
+                else
+                if(Math.abs(t-num)>10)
+                {
+                    x="Morno";
+                    color_code="morno";
+                    document.getElementById('imagem').src='img/morno.png';
+                }
+                else{
+                    x="Quente";
+                    color_code="quente";
+                    document.getElementById('imagem').src='img/quente.png';
+                }
+                document.getElementById('tentativas_feitas').innerHTML='<p class="'+color_code+'">' + t +" está " + x + '</p>' + document.getElementById('tentativas_feitas').innerHTML;
+            }
+            else{
+                alert("Tentativa inválida");
+                document.getElementById('tentativa').value;
+            }
+        }
+    </script>
+    <h1>Definir o intervalo([30,500])</h1>
+    <input id="limite" type="number" min="30" max="500">
+    <button id="definir_limite" onclick=gerar_numero()>Definir Limite</button>
+    <h1>Tenta acertar</h1>
+    <input id="tentativa" type="number" disabled="disabled">
+    <button id="tentar" disabled="disabled" onclick=verificar()>Tentar</button>
+    <br>
+    <div id="tentativas_feitas" style="float: left;background-color: darkgrey;width: 80%;height: auto;min-height: 200px" >
+    </div>
+    <div style="float: right;width: 20%">
+        <img id="imagem" src="img/0.png" style="width: 100%">
+    </div>
+</body>
+</html>

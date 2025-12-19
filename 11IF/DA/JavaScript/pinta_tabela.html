@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pinta tabela</title>
+</head>
+<body>
+    <table id="table" border="2" style="border-collapse: collapse;margin:auto;text-align:center;height: 300px;width: 300px;">
+        <tr>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+        </tr>
+        <tr>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+        </tr>
+        <tr>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+            <td class="td" onclick="pintar(this)" ondblclick="limpar(this)"></td>
+        </tr>
+    </table>
+    <div align="center" >
+        <input id="cor" type="color" value="#000000">
+        <br>
+        <button onclick="limpar_tudo()">Limpar Tudo</button>
+    </div>
+    <script>
+        function pintar(x){
+            x.style.backgroundColor=document.getElementById("cor").value
+        }
+        function limpar(y){
+            y.style.backgroundColor="white";
+        }
+        function limpar_tudo(z){
+            c=document.querySelectorAll("td")
+            c.forEach(v=>v.style.backgroundColor='white')
+        }
+    </script>
+</body>
+</html>

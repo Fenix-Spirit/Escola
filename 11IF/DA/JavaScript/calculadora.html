@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>calculadora</title>
+    <style>
+        #resultado{
+            background-color: #3f3e3e;
+            height: 40px;
+            color: white;
+        }
+        #equação{
+            height: 40px;
+            background-color: #3f3e3e;
+            color: white;
+        }
+        tr,td{
+            border: 1px solid black;
+        }
+        td:active{background-color: red}
+        table{
+            border-collapse: collapse;
+            border: 2px solid black;
+            margin: auto;
+            text-align: center;
+            width: 200px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td id="equação" colspan="4"> </td>
+        </tr>
+        <tr>
+            <td id="resultado" colspan="4"> </td>
+        </tr>
+        <tr>
+            <td onclick=add("1")>1</td>
+            <td onclick=add("2")>2</td>
+            <td onclick=add("3")>3</td>
+            <td onclick=add("+")>+</td>
+        </tr>
+        <tr>
+            <td onclick=add("4")>4</td>
+            <td onclick=add("5")>5</td>
+            <td onclick=add("6")>6</td>
+            <td onclick=add("-")>-</td>
+        </tr>
+        <tr>
+            <td onclick=add("7")>7</td>
+            <td onclick=add("8")>8</td>
+            <td onclick=add("9")>9</td>
+            <td onclick=add("*")>*</td>
+        </tr>
+        <tr>
+            <td onclick=add("0")>0</td>
+            <td onclick=add("=")>=</td>
+            <td onclick=add("C")>C</td>
+            <td onclick=add("/")>/</td>
+        </tr>
+    </table>
+    <script>
+        let eq="";
+        function add(x){
+            switch (x){
+                case "1":
+                    eq+="1";
+                    document.getElementById("resultado").innerHTML="1";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "2":
+                    eq+="2";
+                    document.getElementById("resultado").innerHTML="2";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "3":
+                    eq+="3";
+                    document.getElementById("resultado").innerHTML="3";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "4":
+                    eq+="4";
+                    document.getElementById("resultado").innerHTML="4";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "5":
+                    eq+="5";
+                    document.getElementById("resultado").innerHTML="5";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "6":
+                    eq+="6";
+                    document.getElementById("resultado").innerHTML="6";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "7":
+                    eq+="7";
+                    document.getElementById("resultado").innerHTML="7";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "8":
+                    eq+="8";
+                    document.getElementById("resultado").innerHTML="8";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "9":
+                    eq+="9";
+                    document.getElementById("resultado").innerHTML="9";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "0":
+                    eq+="0";
+                    document.getElementById("resultado").innerHTML="0";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "=":
+                    document.getElementById("equação").innerHTML=eq
+                    eq=eval(eq);
+                    document.getElementById("resultado").innerHTML=eq;
+                    break
+                case "C":
+                    eq=""
+                    document.getElementById("resultado").innerHTML=""
+                    document.getElementById("equação").innerHTML=""
+                    break
+                case "/":
+                    eq+="/"
+                    document.getElementById("resultado").innerHTML="/";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "*":
+                    eq+="*"
+                    document.getElementById("resultado").innerHTML="*";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "-":
+                    eq+="-"
+                    document.getElementById("resultado").innerHTML="-";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+                case "+":
+                    eq+="+"
+                    document.getElementById("resultado").innerHTML="+";
+                    document.getElementById("equação").innerHTML=eq;
+                    break
+            }
+            console.log(eq);
+        }
+    </script>
+</body>
+</html>

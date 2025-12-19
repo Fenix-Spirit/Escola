@@ -1,0 +1,32 @@
+body{
+    background-image: url("images/background.jpg");
+    background-size: cover;
+}
+img{
+    max-width: 6rem;
+    height: 9rem;
+    margin:0.5%
+}
+.btn_top{
+    margin-top: 20% ;
+}
+#escolherNome{
+    text-align: center;
+}
+#bet_div{
+    padding-top: 10%;
+}
+#play{
+    height: 32rem;
+    padding: 5%;
+    display: grid;
+    grid-template: 40% 40% /20% 80%;
+    row-gap: 10%;
+}
+#c_deck{
+    grid-row-end: span 2;
+    align-self: center;
+}
+#jogadas{
+    gap: 1rem;
+}

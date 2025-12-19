@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Alternador de Cores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .coresDisplay{
+            min-width: 5%;
+            min-height: auto;
+        }
+
+        #listaCores div {
+            width: 50px;
+            height: 25px;
+            display: inline-block;
+            margin: 5px;
+            border: 1px solid #888;
+        }
+
+        .linha {
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 8px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body id="body">
+
+    <h2>Alternador de Cores com Intervalo</h2>
+
+    <div class="linha">
+        <label>Escolher cor: </label>
+        <input type="color" id="inputCor">
+        <button onclick="adicionarCor()">Adicionar Cor</button>
+    </div>
+
+    <div class="linha">
+        <strong>Cores selecionadas:</strong>
+        <div id="listaCores"></div>
+    </div>
+
+    <div class="linha">
+        <label>Intervalo (segundos): </label>
+        <input type="number" id="intervalo" min="1" value="1">
+    </div>
+
+    <button id="btnControlar" onclick="controlar()" disabled>Começar</button>
+	<button id="btnLimpar" onclick="limpar()" disabled>Limpar</button>
+
+    <script>
+        let cores=[];
+		let cor=document.getElementById("inputCor");
+        let listaC=document.getElementById("listaCores");
+		let i=0
+        let ciclo=false;
+		let id_ciclo;
+        function adicionarCor(){
+			document.getElementById("btnControlar").disabled=false;
+			document.getElementById("btnLimpar").disabled=false;
+            cores.push(cor.value);
+			console.log(cores);
+			listaC.innerHTML+="<div class='coresDisplay' onclick='remover(this.id)' id='cor"+i+"'></div>"
+            document.getElementById("cor"+i).style.backgroundColor=cores[i];
+            i++;
+        }
+        function limpar(){
+			document.getElementById("btnControlar").disabled=true;
+			document.getElementById("btnLimpar").disabled=true;
+            listaC.innerHTML="";
+			cores=[];
+			i=0
+        }
+        function controlar(){
+			if (ciclo){
+				document.getElementById("btnLimpar").disabled=false;
+				document.getElementById("btnControlar").innerHTML="Começar";
+				ciclo=false;
+				clearInterval(id_ciclo)
+            }
+			else {
+				let tempo=document.getElementById("intervalo").value*1000;
+				document.getElementById("btnControlar").innerHTML="Parar";
+				document.getElementById("btnLimpar").disabled=true;
+				ciclo=true;
+				let k=0;
+				id_ciclo=setInterval(function(){
+					document.getElementById("body").style.backgroundColor=cores[k];
+					k++
+                    if(k>cores.length-1){
+						k=0;
+                    }
+					},tempo);
+            }
+        }
+		function remover(x){
+			let eliminar=x.charAt(x.length-1);
+			cores.splice(eliminar,1)
+			i--;
+			document.getElementById(x).remove();
+            console.log(cores);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var n1=parseInt(prompt("1º número"))
+        sinal=prompt("sinal")
+        var n2=parseInt(prompt("2º número"))
+        if (sinal=="+"){
+            resultado=n1+n2;
+            document.write(n1+sinal+n2+"="+resultado);
+        }
+        else
+            if (sinal=="*"){
+                resultado=n1*n2
+                document.write(n1+sinal+n2+"="+resultado);
+            }
+            else
+                if (sinal=="-"){
+                    resultado=n1-n2;
+                    document.write(n1+sinal+n2+"="+resultado);
+                }
+                else
+                    if (sinal=="/"){
+                        resultado=n1/n2
+                        document.write(n1+sinal+n2+"="+resultado)
+                    }
+        </script>
+</body>
+</html>

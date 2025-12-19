@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        n=prompt();
+        total_pos=0;
+        total_neg=0;
+        soma=0;
+        mais_alta=0;
+        mais_baixa=999;
+        for (i=0; i<n; i++) {
+            nota=parseInt(prompt())
+            if (nota>=10){
+                total_pos++
+            }
+            else if (nota<10){
+                total_neg++
+            }
+            soma=(soma+nota)
+            if(nota<mais_baixa){
+                mais_baixa=nota
+            }
+            if(nota>mais_alta){
+                mais_alta=nota
+            }
+        }
+        media=soma/n
+        document.write(total_pos,"<br>",total_neg,"<br>",media,"<br>",mais_alta,"<br>",mais_baixa)
+    </script>
+</body>
+</html>

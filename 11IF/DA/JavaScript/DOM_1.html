@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p id="nome" onmousedown="alert('OLÁ MUNDO')" onmouseover="this.style.color='red';this.style.fontWeight='bold';" onmouseout="this.style.color='black';this.style.fontWeight='normal';">Rodrigo Santos Costa</p>
+    <div style="background-color: red" onmousedown="div_click(this)">Criar uma página com um parágrafo com o seu nome, uma div com fundo vermelho e este texto e uma tabela com 2 linhas 2 colunas contendo 1, 2, 3, 4</div>
+    <table id="table" border="2" style="border-collapse: collapse;margin:auto;text-align:center;height: 200px;width: 200px;" >
+        <tr>
+            <td onclick="c1(this)" ondblclick="c2(this)">1</td>
+            <td onclick="c1(this)" ondblclick="c2(this)">2</td>
+        </tr>
+        <tr>
+            <td onclick="c1(this)" ondblclick="c2(this)">3</td>
+            <td onclick="c1(this)" ondblclick="c2(this)">4</td>
+        </tr>
+    </table>
+    <script>
+        function div_click(x){
+            x.innerHTML=prompt();
+            x.style.backgroundColor="blue";
+        }
+        function c1(y){
+            y.style.backgroundColor="blue";
+        }
+        function c2(z){
+            z.style.backgroundColor="green";
+            var n=parseInt(z.innerHTML);
+            n=n+1
+            z.innerHTML=n
+        }
+    </script>
+</body>
+</html>

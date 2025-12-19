@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrizes</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        #criaçao{
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            margin-bottom: 5%;
+        }
+        table{
+            text-align: center;
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        tr,td{
+            min-width: 25px;
+            border: 1px solid black;
+        }
+        #adicionar{
+            width: 50%;
+            margin-bottom: 5%;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="criaçao">
+        <label for="linhas">Linhas</label>
+        <input type="number" id="linhas" value=0>
+        <label for="colunas">Colunas</label>
+        <input type="number" id="colunas" value=0>
+        <button id="create" onclick="criar()">Criar</button>
+    </div>
+    <div id="adicionar">
+        <p></p>
+        <label for="valor" id="lbl_valor">Valor [0][0]?</label>
+        <input type="number" id="valor">
+        <button onclick="adicionar()">Adicionar</button>
+    </div>
+    <div id="calcular">
+        <button onclick="calcular()">Calcular</button>
+        <table id="tabela"></table>
+        <h2 id="estatisticas"></h2>
+    </div>
+    <script>
+		let a=0,b=0,count=0,linha=0,coluna=0;
+        valores=[];
+		function criar(){
+			document.getElementById("adicionar").style.display = "block";
+			linha=document.getElementById("linhas").value;
+			coluna = document.getElementById("colunas").value;
+			let table=document.getElementById("tabela");
+			table.innerHTML="";
+			for (let i=0; i <linha; i++) {
+				valores[i]=[];
+				let tr="<tr id='l"+i+"'></tr>"
+				table.innerHTML+=tr
+				for (let j = 0; j < coluna; j++) {
+					let td="<td id='c_"+i+j+"'>0</td>"
+					document.getElementById("l"+i).innerHTML+=td;
+					valores[i][j]=0;
+				}
+			}
+		}
+
+		function adicionar(){
+
+			let max_valor=linha*coluna;
+			if (count>=max_valor){
+				alert("todos escolhidos")
+			}
+			else {
+                v=parseInt(document.getElementById("valor").value);
+				valores[a][b]=v;
+
+				document.getElementById("c_" + a + b).innerHTML = v;
+                if(b<(coluna-1)){
+					b++
+                }
+				else{
+					a++;
+					b=0;
+                }
+				count++;
+
+				document.getElementById("lbl_valor").innerHTML = "Valor ["+a+"]["+b+"]?";
+				document.getElementById("valor").focus()
+			}
+		}
+
+		function calcular(){
+			let maximo=0,maximo_pos=[],minimo=99999,minimo_pos=[],bit=0;
+            document.getElementById("estatisticas").innerHTML="";
+
+            for (let i=0; i<linha; i++) {
+				let soma=0;
+				for (let j=0; j<coluna; j++) {
+					soma+=valores[i][j];
+                }
+				let media=soma/linha;
+				document.getElementById("estatisticas").innerHTML+="Linha"+(i+1)+"| Soma: "+soma+" Media: "+media+"<br>";
+            }
+			for (let i=0; i<coluna; i++) {
+				let soma=0;
+				for (let j=0; j<linha; j++) {
+					soma+=valores[j][i];
+				}
+				let media=soma/linha;
+				document.getElementById("estatisticas").innerHTML+="Coluna"+(i+1)+"| Soma: "+soma+" Media: "+media+"<br>";
+            }
+			for (let i=0; i<linha; i++) {
+				for (let j=0; j<coluna; j++) {
+					if (valores[i][j]>maximo){
+						maximo=valores[i][j];
+						maximo_pos=[];
+						maximo_pos.push("["+i+","+j+"]");
+                    }
+					else if (valores[i][j]==maximo){
+						maximo_pos.push("["+i+","+j+"]");
+                    }
+					if (valores[i][j]<minimo){
+						minimo=valores[i][j];
+						minimo_pos=[];
+						minimo_pos.push("["+i+","+j+"]");
+                    }
+					else if (valores[i][j]==minimo){
+						minimo_pos.push("["+i+","+j+"]");
+                    }
+                }
+            }
+			document.getElementById("estatisticas").innerHTML+="Máximo "+maximo+"| Posições: [ "+maximo_pos+" ]<br>";
+			document.getElementById("estatisticas").innerHTML+="Mínimo "+minimo+"| Posições: [ "+minimo_pos+" ]<br>";
+			if (linha==coluna){
+				soma=0
+				for (let i=0; i<linha; i++) {
+					soma+=valores[i][i];
+					if (valores[i][i]==1){
+						bit=1
+                    }
+					else{bit=0}
+                }
+				if (bit==1){
+					document.getElementById("estatisticas").innerHTML+="Matriz com diagonal identidade!"+"<br>"
+                }
+				document.getElementById("estatisticas").innerHTML+="Soma diagonal principal= "+soma+"<br>"
+                soma=0
+                for (let i=0,j=linha-1; i<linha; i++,j--) {
+					soma+=valores[i][j];
+                }
+				document.getElementById("estatisticas").innerHTML+="Soma diagonal secundária= "+soma
+            }
+			else {document.getElementById("estatisticas").innerHTML+="Matriz não quadrada"}
+		}
+    </script>
+</body>
+</html>

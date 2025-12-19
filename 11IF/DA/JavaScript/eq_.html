@@ -1,0 +1,162 @@
+    <!DOCTYPE html>
+<html>
+<head>
+	<title>Equações de 2º grau</title>
+    <meta charset="utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+<style type="text/css">
+body, button, input {
+	font-family: Oswald, sans-serif;
+}
+h1, h2 {
+	text-align: center;
+}
+button {
+	margin: 20px;
+	width: 150px;
+	font-size: 20px;
+}
+input {
+	font-size: 16px;
+	margin: 20px;
+}
+#container {
+	margin: auto;
+	width: 800px;
+	overflow: auto;
+}
+#formula {
+	font-size: 64px;
+	background-color: silver;
+	text-align: center;
+}
+#formula span {
+	width: 72px;
+	height: 72px;
+	background-color: yellow;
+	border: 1px solid black;
+	line-height: 72px;
+	display: inline-block;
+	text-align: center;
+}
+#row {
+	text-align: center;
+}
+#win_lose {
+	font-size: 24px;
+	text-align: center;
+}
+#win {
+	color: green;
+	font-weight: bold;
+}
+#lose {
+	color: red;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<div id="container">
+		<h1>Indique as raizes da equação de 2º grau ou se é impossível</h1>
+		<div id="formula">	
+			<span id="a"></span> X <sup>2</sup> + <span id="b"></span> X + <span id="c"></span> = 0
+		</div>
+		<h2>Qual o resultado?</h2>
+		<div id="row">
+			<button id="playImpossible" onclick=imp()>Impossível</button>
+			<button id="playOneSolution" onclick=sol_1()>Uma solução</button>
+			<button id="playTwoSolutions" onclick=sol_2()>Duas soluções</button>
+		</div>
+		<div id="row">
+			<input id="s1" type="number" maxlength="10" placeholder="Digite a Solução" hidden="hidden">
+			<input id="s2" type="number" maxlength="10" placeholder="Digite a Solução" hidden="hidden">
+		</div>
+		<div id="row">
+			<button id="btValidate" onclick=validar() disabled="disabled">Validar</button>
+		</div>
+		<div id="win_lose">	
+			ACERTOU <span id="win">0</span> vezes e PERDEU <span id="lose">0</span> vezes
+		</div>
+		<div id="row">
+			<button onclick=again()>Jogar Novamente!</button>
+		</div>
+	</div>
+    <script>
+        var a=Math.floor(Math.random() * 18)-9;
+        var b=Math.floor(Math.random() * 18)-9;
+        var c=Math.floor(Math.random() * 18)-9;
+        var solucao,sol_user,acertou=0,errou=0,d,res_1,res_2;
+        document.getElementById("a").innerHTML= a;
+        document.getElementById("b").innerHTML= b;
+        document.getElementById("c").innerHTML= c;
+        function imp(){
+            document.getElementById("s1").hidden=true;
+            document.getElementById("s2").hidden=true;
+            document.getElementById("btValidate").disabled=false;
+            sol_user=0
+        }
+        function sol_2(){
+            document.getElementById("s1").hidden=false;
+            document.getElementById("s2").hidden=false;
+            document.getElementById("btValidate").disabled=false;
+            sol_user=2
+        }
+        function sol_1(){
+            document.getElementById("s1").hidden=false;
+            document.getElementById("s2").hidden=true;
+            document.getElementById("btValidate").disabled=false;
+            sol_user=1
+        }
+        function validar(){
+            d=b*b-4*a*c;
+            console.log(d);
+            if(d<0){
+                solucao=0;
+            }
+            else if(d==0){
+                solucao=1;
+                res_1=-b/2*a;
+            }
+            else{
+                solucao=2;
+                res_1=parseInt((-b+d)/2*a);
+                res_2=parseInt((-b-d)/2*a);
+            }
+            if (solucao==0 && sol_user==0){
+                acertou++;
+            }
+            else if (solucao==1 && sol_user==1 && res_1==document.getElementById("s1").value){
+                acertou++;
+            }
+            else if (solucao==2 && sol_user==2 && res_2==document.getElementById("s2").value && res_1==document.getElementById("s1").value){
+                acertou++;
+            }
+            else{
+                errou++;
+            }
+            document.getElementById("win").innerHTML= acertou.toString();
+            document.getElementById("lose").innerHTML= errou.toString();
+            document.getElementById("btValidate").disabled=true;
+            document.getElementById("playOneSolution").disabled=true;
+            document.getElementById("playTwoSolutions").disabled=true;
+            document.getElementById("playImpossible").disabled=true;
+        }
+        function again(){
+            a=Math.floor(Math.random() * 18)-9;
+            b=Math.floor(Math.random() * 18)-9;
+            c=Math.floor(Math.random() * 18)-9;
+            document.getElementById("a").innerHTML= a;
+            document.getElementById("b").innerHTML= b;
+            document.getElementById("c").innerHTML= c;
+            document.getElementById("s1").value="";
+            document.getElementById("s2").value="";
+            document.getElementById("s1").hidden=true;
+            document.getElementById("s2").hidden=true;
+            document.getElementById("playOneSolution").disabled=false;
+            document.getElementById("playTwoSolutions").disabled=false;
+            document.getElementById("playImpossible").disabled=false;
+        }
+    </script>
+</body>
+</html>

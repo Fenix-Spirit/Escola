@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tempo</title>
+</head>
+<body>
+    <script>
+        function intervalo(){
+			ID_intervalo=setInterval(hello,1000)
+        }
+        function hello() {
+			let txt = document.getElementById("txt");
+            txt.innerHTML += "Hello ";
+        }
+        function parar() {
+            clearInterval(ID_intervalo);
+        }
+        function TimeOut() {
+            let txt = document.getElementById("txt");
+			txt.innerHTML += "ADEUS ";
+        }
+    </script>
+    <button onclick=intervalo()>Hello com setInterval</button>
+    <button onclick=parar()>parar o setInterval</button>
+    <button onclick=setTimeout(TimeOut,3000)>adeus com setTimeOut</button>
+    <p id="txt"> </p>
+</body>
+</html>

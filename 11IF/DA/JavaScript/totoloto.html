@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Totoloto</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            border: 2px solid black;
+            text-align: center;
+            width: 500px;
+        }
+        tr,td{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td id="n_1" onclick=escolha("1",this)>1</td>
+            <td id="n_2" onclick=escolha("2",this)>2</td>
+            <td id="n_3" onclick=escolha("3",this)>3</td>
+            <td id="n_4" onclick=escolha("4",this)>4</td>
+            <td id="n_5" onclick=escolha("5",this)>5</td>
+            <td id="n_6" onclick=escolha("6",this)>6</td>
+            <td id="n_7" onclick=escolha("7",this)>7</td>
+        </tr>
+        <tr>
+            <td id="n_8" onclick=escolha("8",this)>8</td>
+            <td id="n_9" onclick=escolha("9",this)>9</td>
+            <td id="n_10" onclick=escolha("10",this)>10</td>
+            <td id="n_11" onclick=escolha("11",this)>11</td>
+            <td id="n_12" onclick=escolha("12",this)>12</td>
+            <td id="n_13" onclick=escolha("13",this)>13</td>
+            <td id="n_14" onclick=escolha("14",this)>14</td>
+        </tr>
+        <tr>
+            <td id="n_15" onclick=escolha("15",this)>15</td>
+            <td id="n_16" onclick=escolha("16",this)>16</td>
+            <td id="n_17" onclick=escolha("17",this)>17</td>
+            <td id="n_18" onclick=escolha("18",this)>18</td>
+            <td id="n_19" onclick=escolha("19",this)>19</td>
+            <td id="n_20" onclick=escolha("20",this)>20</td>
+            <td id="n_21" onclick=escolha("21",this)>21</td>
+        </tr>
+        <tr>
+            <td id="n_22" onclick=escolha("22",this)>22</td>
+            <td id="n_23" onclick=escolha("23",this)>23</td>
+            <td id="n_24" onclick=escolha("24",this)>24</td>
+            <td id="n_25" onclick=escolha("25",this)>25</td>
+            <td id="n_26" onclick=escolha("26",this)>26</td>
+            <td id="n_27" onclick=escolha("27",this)>27</td>
+            <td id="n_28" onclick=escolha("28",this)>28</td>
+        </tr>
+        <tr>
+            <td id="n_29" onclick=escolha("29",this)>29</td>
+            <td id="n_30" onclick=escolha("30",this)>30</td>
+            <td id="n_31" onclick=escolha("31",this)>31</td>
+            <td id="n_32" onclick=escolha("32",this)>32</td>
+            <td id="n_33" onclick=escolha("33",this)>33</td>
+            <td id="n_34" onclick=escolha("34",this)>34</td>
+            <td id="n_35" onclick=escolha("35",this)>35</td>
+        </tr>
+        <tr>
+            <td id="n_36" onclick=escolha("36",this)>36</td>
+            <td id="n_37" onclick=escolha("37",this)>37</td>
+            <td id="n_38" onclick=escolha("38",this)>38</td>
+            <td id="n_39" onclick=escolha("39",this)>39</td>
+            <td id="n_40" onclick=escolha("40",this)>40</td>
+            <td id="n_41" onclick=escolha("41",this)>41</td>
+            <td id="n_42" onclick=escolha("42",this)>42</td>
+        </tr>
+        <tr>
+            <td id="n_43" onclick=escolha("43",this)>43</td>
+            <td id="n_44" onclick=escolha("44",this)>44</td>
+            <td id="n_45" onclick=escolha("45",this)>45</td>
+            <td id="n_46" onclick=escolha("46",this)>46</td>
+            <td id="n_47" onclick=escolha("47",this)>47</td>
+            <td id="n_48" onclick=escolha("48",this)>48</td>
+            <td id="n_49" onclick=escolha("49",this)>49</td>
+        </tr>
+    </table>
+    <button onclick=jogar()>Jogar!</button>
+    <h2>CHAVE JOGADOR</h2>
+    <p id="chave1"></p>
+    <h2>CHAVE SORTEADA</h2>
+    <p id="chave2"></p>
+    <h1 id="n_certos"></h1>
+    <script>
+        let chave_jogador=[],count_certos=0,num_certos=[],chave_random=[],count=0, lista=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        function escolha(x,y){
+            if (lista[x] == 1) {
+                lista[x] = 0;
+                y.style.backgroundColor = "white";
+                chave_jogador.splice(chave_jogador.indexOf(x), 1);
+                count--;
+                }
+            else if (lista[x] == 0) {
+                if(count>=6) {
+                    alert("Já escolheu os 6 números!");
+                }
+                else {
+                chave_jogador.push(x);
+                lista[x] = 1;
+                y.style.backgroundColor = "yellow";
+                count++;
+                }
+            }
+        }
+        function jogar() {
+            count_certos=0
+            if (count != 6) {
+                alert("Precisa de escolher 6 números!");
+            }
+            else {
+                for (let i = 0; i < 6; i++) {
+                    chave_random.push(Math.floor((Math.random() * 49) + 1));
+                }
+                document.getElementById("chave1").innerHTML=chave_jogador.join(";");
+                document.getElementById("chave2").innerHTML=chave_random.join(";");
+                for (let i = 0; i < 6; i++) {
+                    if (chave_random.includes(chave_jogador[i])){
+                        count_certos++
+                        num_certos.push(chave_jogador[i]);
+                        document.getElementById("n_certos").innerHTML=num_certos.join(" ");
+                    }
+                }
+                alert(count_certos+" números certos!")
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vetor</title>
+</head>
+<body>
+    <div id="input">
+        <h1>Valor :</h1>
+        <input id="adicionar" type="number" value="1"/>
+        <button id="btn_add" onclick=add() >Adicionar</button>
+        <input id="eliminar" type="number" placeholder="Digite um número"/>
+        <button id="btn_elim" onclick=elim() >Eliminar</button>
+        <input id="pesquisar" type="number" placeholder="Digite um número"/>
+        <button id="btn_search" onclick=search() >Pesquisar</button>
+        <button id="listar" onclick=listar()>Listar</button>
+        <button onclick=sort_asc()>Listar em ascendente</button>
+        <button onclick=sort_dsc()>Listar em descendente</button>
+        <button>Repetidos</button>
+        <input type="radio" class="par-impar" id="impar" value="impar" name="p/i">
+        <label for="impar">Ímpar</label>
+        <input type="radio"  class="par-impar" id="par" value="par" name="p/i">
+        <label for="par">Par</label>
+        <p id="lista"></p>
+        <p id="resultado_search"></p>
+    </div>
+    <div>
+        <h1>Estatísticas:</h1>
+    </div>
+    <script>
+        let vetor=[],vetor_asc=[],vetor_dsc=[],search_list=[];
+        function add(){
+            vetor.push(document.getElementById('adicionar').value);
+            document.getElementById('adicionar').value = '1';
+            document.getElementById('lista').innerHTML=vetor;
+            console.log(vetor);
+        }
+        function elim(){
+            vetor.splice(vetor.indexOf(document.getElementById('eliminar').value),1);
+            document.getElementById('eliminar').value = '';
+            document.getElementById('lista').innerHTML=vetor;
+            console.log(vetor);
+        }
+        function search(){
+            document.getElementById('resultado_search').innerHTML=""
+           pes=parseInt(document.getElementById("pesquisar").value);
+           p=0;
+           for(let k=0;k<vetor.length;k++){
+               if(vetor[k]==pes){
+                   document.getElementById('resultado_search').innerHTML+="Existe na posição:" + (k+1);
+                   p=1;
+               }
+           }
+           if(p==0){
+               document.getElementById('resultado_search').innerHTML="Não esiste"
+           }
+        }
+        function sort_asc(){
+            vetor_asc=vetor.toSorted(function (a, b){return a-b});
+            document.getElementById('lista').innerHTML=vetor_asc;
+            console.log(vetor_asc);
+        }
+        function sort_dsc(){
+            vetor_dsc=vetor.toSorted(function (a, b){return b-a});
+            document.getElementById('lista').innerHTML=vetor_dsc;
+            console.log(vetor_dsc);
+        }
+        function listar(){
+            let par=[],impar=[]
+            par_impar=document.getElementsByTagName("p/i")
+            switch (document.querySelector('input[name="p/i"]:checked').value) {
+                case 'impar':
+                    impar=vetor.filter(par_ou_impar,"impar")
+                    document.getElementById('lista').innerHTML=impar;
+                    break;
+                case 'par':
+                    par=vetor.filter(par_ou_impar,"par")
+                    document.getElementById('lista').innerHTML=par;
+                    break;
+                default:
+                    document.getElementById('lista').innerHTML=vetor;
+                    break;
+            }
+        }
+        //imcompleto
+    </script>
+</body>
+</html>

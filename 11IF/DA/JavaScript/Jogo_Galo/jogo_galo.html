@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo Do Galo</title>
+    <style>
+        .td_jogo{
+            height: 50px;
+            width: 50px;
+        }
+        p{
+            display: flex;
+            justify-content: center;
+        }
+        table{
+            text-align: center;
+            color: white;
+            margin: auto;
+            border : 2px solid black;
+            border-collapse: collapse;
+            height: 200px;
+            width: 500px;
+        }
+        button{
+            margin: auto;
+        }
+        #jogo{
+            font-size: xxx-large;
+            height: 350px;
+            width: 350px;
+        }
+        td{
+            font-size: x-large;
+            width: 125px;
+            border : 2px solid black;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+<script src="jogo_galo.js"></script>
+    <div>
+        <table id="jogo">
+            <tr>
+                <td class="td_jogo" id="slot_1" onclick=escolha(this,0)> </td>
+                <td class="td_jogo" id="slot_2" onclick=escolha(this,1)> </td>
+                <td class="td_jogo" id="slot_3" onclick=escolha(this,2)> </td>
+            </tr>
+            <tr>
+                <td class="td_jogo" id="slot_4" onclick=escolha(this,3)> </td>
+                <td id="slot_5" class="td_jogo" onclick=escolha(this,4)> </td>
+                <td class="td_jogo" id="slot_6" onclick=escolha(this,5)> </td>
+            </tr>
+            <tr>
+                <td id="slot_7" class="td_jogo" onclick=escolha(this,6)> </td>
+                <td id="slot_8" class="td_jogo" onclick=escolha(this,7)> </td>
+                <td id="slot_9" class="td_jogo" onclick=escolha(this,8)> </td>
+            </tr>
+        </table>
+    </div>
+    <p>
+        <button id="btn_again" onclick=playAgain() disabled="disabled">Jogar Novamente</button>
+    </p>
+        <table>
+            <tr>
+                <td>Vitórias jogador 1</td>
+                <td>Vitórias jogador 2</td>
+                <td>Empates</td>
+                <td>Total de jogos</td>
+            </tr>
+            <tr>
+                <td id="v_1">0</td>
+                <td id="v_2">0</td>
+                <td id="emp">0</td>
+                <td id="total">0</td>
+            </tr>
+        </table>
+</body>
+</html>
