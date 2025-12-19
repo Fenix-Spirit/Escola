@@ -1,0 +1,7 @@
+frase=input()
+frase=frase.replace("a","A")
+frase=frase.replace("e","E")
+frase=frase.replace("i","I")
+frase=frase.replace("o","O")
+frase=frase.replace("u","U")
+print(frase)

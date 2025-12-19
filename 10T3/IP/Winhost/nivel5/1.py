@@ -1,0 +1,8 @@
+frase=input()
+frase=frase.lower()
+n_a=frase.count("a")
+n_e=frase.count("e")
+n_i=frase.count("i")
+n_o=frase.count("o")
+n_u=frase.count("u")
+print(n_a,n_e,n_i,n_o,n_u)

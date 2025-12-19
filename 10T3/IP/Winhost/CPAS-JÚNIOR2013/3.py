@@ -1,0 +1,13 @@
+n=int(input())
+x=1
+i=1
+x1=1
+x2=0
+print(x2)
+print(x1)
+while(i<n-1):
+    x=x1+x2
+    print(x)
+    x2=x1
+    x1=x
+    i+=1
