@@ -1,4 +1,5 @@
 //Nome e começo
+// noinspection EqualityComparisonWithCoercionJS
 
 function verifica_nome(){
 	if (this.value!=""){
@@ -9,9 +10,12 @@ function verifica_nome(){
 	}
 }
 function comecar(){
+	let nome = document.getElementById("Nome").value;
 	document.getElementById("começar").hidden = true;
 	document.getElementById("valor_bet").hidden = false;
 	document.getElementById("bet").hidden = false;
+	document.getElementById("info_user").hidden = false;
+	document.getElementById("nome_display").innerHTML=nome;
 }
 //Dinheiro inicial
 
@@ -21,6 +25,7 @@ while (money < 10) {
 	money = Math.floor(Math.random() * 101)
 }
 document.getElementById("valor_bet").max=money;
+document.getElementById("money_display").innerHTML = money;
 //Cartas
 const C_back="images/0_back_card.png";
 const deck=[
@@ -39,6 +44,7 @@ function aposta_realizada(){
 		document.getElementById("bet").hidden = true;
 		aposta=document.getElementById("valor_bet").value;
 		money-=aposta;
+		document.getElementById("money_display").innerHTML = money;
 		document.getElementById("play").hidden = false;
 		document.getElementById("jogadas").hidden = false;
 		document.getElementById("jogadas").classList.add("d-flex","justify-content-center");
@@ -48,7 +54,7 @@ function aposta_realizada(){
 		random_carta("PLAYER")
 		random_carta("DEALER")
 		random_carta("DEALER")
-		document.getElementById("c_dealer1").src="images/0_back_card.png";
+		document.getElementById("c_dealer1").src=C_back;
 		document.getElementById("c_dealer1").setAttribute("alt","carta para baixo")
 		if (aposta>money){
 			document.getElementById("double").disabled=true;
@@ -74,6 +80,7 @@ function random_carta(quem){
 		c_player_id++;
 		deck[2][carta_selecionada]=1;
 		if (contar("PLAYER")>21){
+			console.log("player ultrapassou")
 			document.getElementById("hit").disabled=true;
 			document.getElementById("stand").disabled=true;
 			document.getElementById("split").disabled=true;
@@ -112,9 +119,10 @@ function split(){
 function double_down(){
 	money-=aposta;
 	aposta+=aposta;
+	document.getElementById("money_display").innerHTML = money;
 	random_carta("PLAYER");
-}//incompleto
-
+	stand();
+}
 function dealer(){
 	document.getElementById("c_dealer1").setAttribute("alt","carta para cima");
 	for (let i=0; i<52; i++){
@@ -140,7 +148,7 @@ function reset(){
 	random_carta("PLAYER")
 	random_carta("DEALER")
 	random_carta("DEALER")
-	document.getElementById("c_dealer1").src="images/0_back_card.png";
+	document.getElementById("c_dealer1").src=C_back;
 	document.getElementById("hit").disabled=false;
 	document.getElementById("stand").disabled=false;
 	document.getElementById("split").disabled=false;
