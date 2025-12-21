@@ -8,6 +8,20 @@
     <link rel="stylesheet" href="blackjack.css">
 </head>
 <body>
+    <nav id="info_user" class="navbar fixed-top bg-danger" hidden="hidden">
+        <div class="container-fluid">
+            <span class="navbar-brand">BLACKJACK</span>
+            <div class="navbar-item">
+                <span class="navbar-item">USER:</span>
+                <span class="navbar-item" id="nome_display"></span>
+            </div>
+            <div class="navbar-item">
+                <span class="navbar-item">MONEY:</span>
+                <span class="navbar-item" id="money_display">0</span>
+            </div>
+
+        </div>
+    </nav>
     <div class="d-flex justify-content-center" id="div_comeco">
         <button class="btn_top btn btn-danger btn-lg" id="começar" data-bs-toggle="modal" data-bs-target="#escolherNome">Começar</button>
         <div id="bet_div">
