@@ -50,6 +50,11 @@ function aposta_realizada(){
 		document.getElementById("jogadas").classList.add("d-flex","justify-content-center");
 		document.getElementById("div_comeco").classList.remove("d-flex","justify-content-center");
 		document.getElementById("div_comeco").style.display="none";
+		document.getElementById("hit").disabled=false;
+		document.getElementById("stand").disabled=false;
+		document.getElementById("split").disabled=true;
+		document.getElementById("double").disabled=false;
+		stop_dealer=false;
 		random_carta("PLAYER")
 		random_carta("PLAYER")
 		random_carta("DEALER")
@@ -58,6 +63,9 @@ function aposta_realizada(){
 		document.getElementById("c_dealer1").setAttribute("alt","carta para baixo")
 		if (aposta>money){
 			document.getElementById("double").disabled=true;
+		}
+		if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)==Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
+			document.getElementById("split").disabled=false;
 		}
 	}
 }
@@ -72,19 +80,17 @@ function random_carta(quem){
 		c_dealer_id++;
 		deck[2][carta_selecionada]=2;
 		if (contar("DEALER")>21){
-			console.log("dealer ultrapassou")
+			win_p()
 		}
 	}
 	else if (quem=="PLAYER"){
-		c_player.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' alt='carta para cima' id='c_player"+c_player_id+"'>";
+		c_player.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_player"+c_player_id+"'>";
 		c_player_id++;
 		deck[2][carta_selecionada]=1;
 		if (contar("PLAYER")>21){
-			console.log("player ultrapassou")
-			document.getElementById("hit").disabled=true;
-			document.getElementById("stand").disabled=true;
-			document.getElementById("split").disabled=true;
-			document.getElementById("double").disabled=true;
+			stand()
+			win_d()
+
 		}
 	}
 }
@@ -111,20 +117,7 @@ function stand(){
 	document.getElementById("stand").disabled=true;
 	document.getElementById("split").disabled=true;
 	document.getElementById("double").disabled=true;
-	setTimeout(dealer,1000)
-}//incompleto
-function split(){
-
-}//incompleto alta dificuldade
-function double_down(){
-	money-=aposta;
-	aposta+=aposta;
-	document.getElementById("money_display").innerHTML = money;
-	random_carta("PLAYER");
-	stand();
-}
-function dealer(){
-	document.getElementById("c_dealer1").setAttribute("alt","carta para cima");
+	document.getElementById("c_dealer1").setAttribute("alt","carta para cima")
 	for (let i=0; i<52; i++){
 		if (deck[2][i]==2){
 			if (document.getElementById("c_dealer0").dataset.cardId!=i){
@@ -134,7 +127,63 @@ function dealer(){
 		}
 	}
 }
+function stand_btn(){
+	stand();
+	setTimeout(dealer,500)
+}
+function split(){
 
+}//incompleto alta dificuldade
+function double_down(){
+	money-=aposta;
+	aposta+=aposta;
+	document.getElementById("money_display").innerHTML = money;
+	random_carta("PLAYER");
+	stand_btn()
+}
+function dealer(){
+	if (stop_dealer){
+		return;
+	}
+	let valor=contar("DEALER");
+	if(valor<=16){
+		random_carta("DEALER")
+		setTimeout(dealer,500)
+	}
+	else if (valor==17){
+		if (contar("PLAYER")>17){
+			win_p()
+		}
+		else if (contar("PLAYER")==17){
+			empate()
+		}
+		else{
+			win_d()
+		}
+	}
+	else{
+		if (valor>contar("PLAYER")){
+			win_d()
+		}
+		else{
+			let valor_need=21-valor;
+			let cont=0
+			for (let i=0; i<52; i++){
+				if (deck[2][i]==0){
+					if (deck[1][i]<valor_need){
+						cont++;
+					}
+				}
+			}
+			let cont_luck=cont+Math.floor(Math.random()*5)
+			if (cont_luck>12){
+				random_carta("DEALER")
+				setTimeout(dealer,500)
+			}
+		}
+
+	}
+}
 function reset(){
 	//para testar apenas
 	c_dealer.innerHTML="";
@@ -144,13 +193,18 @@ function reset(){
 	for (let i=0;i<52;i++){
 		deck[2][i]=0;
 	}
-	random_carta("PLAYER")
-	random_carta("PLAYER")
-	random_carta("DEALER")
-	random_carta("DEALER")
-	document.getElementById("c_dealer1").src=C_back;
-	document.getElementById("hit").disabled=false;
-	document.getElementById("stand").disabled=false;
-	document.getElementById("split").disabled=false;
-	document.getElementById("double").disabled=false;
+	aposta_realizada()
+}
+
+//fim rodada
+let stop_dealer=false;
+function win_p(){
+	stop_dealer=true
+	console.log("player ganhou")
+}
+function win_d(){
+	console.log("dealer ganhou")
+}
+function empate(){
+	console.log("empate")
 }
