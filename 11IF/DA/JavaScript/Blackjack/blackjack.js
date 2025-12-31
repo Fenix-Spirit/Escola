@@ -1,12 +1,18 @@
 //Nome e começo
 // noinspection EqualityComparisonWithCoercionJS
 
-function verifica_nome(){
-	if (this.value!=""){
+function verifica_nome(x){
+	if (x.value!=""){
 		document.getElementById("close_nome").setAttribute("data-bs-dismiss","modal");
+		document.getElementById("close_nome").setAttribute("onclick","comecar()");
+		document.getElementById("close_nome").setAttribute("data-bs-toggle","modal");
+		document.getElementById("close_nome").setAttribute("data-bs-target","#bet_div");
 	}
 	else{
 		document.getElementById("close_nome").removeAttribute("data-bs-dismiss");
+		document.getElementById("close_nome").removeAttribute("data-bs-toggle");
+		document.getElementById("close_nome").removeAttribute("onclick");
+		document.getElementById("close_nome").removeAttribute("data-bs-target");
 	}
 }
 function comecar(){
@@ -38,35 +44,43 @@ const c_dealer=document.getElementById("c_dealer");
 const c_player=document.getElementById("c_player");
 let c_dealer_id=0;
 let c_player_id=0;
+function verifica_aposta(x){
+	if (x.value<=money && x.value>0){
+		document.getElementById("bet").setAttribute("onclick","aposta_realizada()");
+		document.getElementById("bet").setAttribute("data-bs-dismiss","modal");
+	}
+	else{
+		document.getElementById("bet").removeAttribute("onclick");
+		document.getElementById("bet").removeAttribute("data-bs-dismiss");
+	}
+}
 function aposta_realizada(){
-	if (document.getElementById("valor_bet").value<=money && document.getElementById("valor_bet").value>0){
-		document.getElementById("valor_bet").hidden = true;
-		document.getElementById("bet").hidden = true;
-		aposta=document.getElementById("valor_bet").value;
-		money-=aposta;
-		document.getElementById("money_display").innerHTML = money;
-		document.getElementById("play").hidden = false;
-		document.getElementById("jogadas").hidden = false;
-		document.getElementById("jogadas").classList.add("d-flex","justify-content-center");
-		document.getElementById("div_comeco").classList.remove("d-flex","justify-content-center");
-		document.getElementById("div_comeco").style.display="none";
-		document.getElementById("hit").disabled=false;
-		document.getElementById("stand").disabled=false;
-		document.getElementById("split").disabled=true;
-		document.getElementById("double").disabled=false;
-		stop_dealer=false;
-		random_carta("PLAYER")
-		random_carta("PLAYER")
-		random_carta("DEALER")
-		random_carta("DEALER")
-		document.getElementById("c_dealer1").src=C_back;
-		document.getElementById("c_dealer1").setAttribute("alt","carta para baixo")
-		if (aposta>money){
-			document.getElementById("double").disabled=true;
-		}
-		if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)==Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
-			document.getElementById("split").disabled=false;
-		}
+	document.getElementById("valor_bet").hidden = true;
+	document.getElementById("bet").hidden = true;
+	aposta=document.getElementById("valor_bet").value;
+	money-=aposta;
+	document.getElementById("money_display").innerHTML = money;
+	document.getElementById("play").hidden = false;
+	document.getElementById("jogadas").hidden = false;
+	document.getElementById("jogadas").classList.add("d-flex","justify-content-center");
+	document.getElementById("div_comeco").classList.remove("d-flex","justify-content-center");
+	document.getElementById("div_comeco").style.display="none";
+	document.getElementById("hit").disabled=false;
+	document.getElementById("stand").disabled=false;
+	document.getElementById("split").disabled=true;
+	document.getElementById("double").disabled=false;
+	stop_dealer=false;
+	random_carta("PLAYER")
+	random_carta("PLAYER")
+	random_carta("DEALER")
+	random_carta("DEALER")
+	document.getElementById("c_dealer1").src=C_back;
+	document.getElementById("c_dealer1").setAttribute("alt","carta para baixo")
+	if (aposta>money){
+		document.getElementById("double").disabled=true;
+	}
+	if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)==Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
+		document.getElementById("split").disabled=false;
 	}
 }
 //ações

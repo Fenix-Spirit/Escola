@@ -24,22 +24,30 @@
     </nav>
     <div class="d-flex justify-content-center" id="div_comeco">
         <button class="btn_top btn btn-danger btn-lg" id="começar" data-bs-toggle="modal" data-bs-target="#escolherNome">Começar</button>
-        <div id="bet_div">
-            <input type="number" class="form-control" min="1" max="100" value="1" id="valor_bet" hidden="hidden">
-            <button class="btn_top btn btn-danger btn-lg" id="bet" onclick=aposta_realizada() hidden="hidden">Apostar</button>
+        <div class="modal fade" id="escolherNome" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="modal-body needs-validation">
+                        <label for="Nome" class="form-label">Insira o seu nome</label>
+                        <input type="text" class="form-control" onchange=verifica_nome(this) id="Nome" required>
+                        <button type="button" id="close_nome" class="btn_top btn btn-danger">Escolher</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="modal fade" id="escolherNome" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form class="modal-body needs-validation">
-                    <label for="Nome" class="form-label">Insira o seu nome</label>
-                    <input type="text" class="form-control" onchange=verifica_nome(this) id="Nome" required>
-                    <button type="button" id="close_nome" onclick=comecar() class="btn_top btn btn-danger">Escolher</button>
-                </form>
+        <div class="modal fade" id="bet_div" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <label for="valor_bet">Quantidade a apostar</label>
+                        <input type="number" class="form-control" min="1" max="100" value="1" id="valor_bet" onchange="verifica_aposta(this)" hidden="hidden">
+                        <button class="btn_top btn btn-danger btn-lg" id="bet" onclick="aposta_realizada()" data-bs-dismiss="modal" hidden="hidden">Apostar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <div id="play" hidden="hidden">
         <div id="c_deck">
             <img alt="carta para baixo" src="images/0_back_card.png">
