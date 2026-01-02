@@ -1,5 +1,4 @@
 //Nome e começo
-// noinspection EqualityComparisonWithCoercionJS
 
 function verifica_nome(x){
 	if (x.value!=""){
@@ -18,8 +17,6 @@ function verifica_nome(x){
 function comecar(){
 	let nome = document.getElementById("Nome").value;
 	document.getElementById("começar").hidden = true;
-	document.getElementById("valor_bet").hidden = false;
-	document.getElementById("bet").hidden = false;
 	document.getElementById("info_user").hidden = false;
 	document.getElementById("nome_display").innerHTML=nome;
 }
@@ -54,10 +51,25 @@ function verifica_aposta(x){
 		document.getElementById("bet").removeAttribute("data-bs-dismiss");
 	}
 }
+function aposta_modal(){
+	bootstrap.Modal.getOrCreateInstance(document.getElementById("win_modal")).hide();
+	bootstrap.Modal.getOrCreateInstance(document.getElementById("lose_modal")).hide();
+	bootstrap.Modal.getOrCreateInstance(document.getElementById("draw_modal")).hide();
+	bootstrap.Modal.getOrCreateInstance(document.getElementById("bet_div")).show();
+
+}
 function aposta_realizada(){
-	document.getElementById("valor_bet").hidden = true;
-	document.getElementById("bet").hidden = true;
-	aposta=document.getElementById("valor_bet").value;
+	c_dealer.innerHTML="";
+	c_player.innerHTML="";
+	c_dealer_id=0;
+	c_player_id=0;
+	for (let i=0;i<52;i++){
+		deck[2][i]=0;
+	}
+	for (let i=0; i<4; i++){
+		deck[1][i]=11;
+	}
+	aposta=parseInt(document.getElementById("valor_bet").value)	;
 	money-=aposta;
 	document.getElementById("money_display").innerHTML = money;
 	document.getElementById("play").hidden = false;
@@ -94,6 +106,12 @@ function random_carta(quem){
 		c_dealer_id++;
 		deck[2][carta_selecionada]=2;
 		if (contar("DEALER")>21){
+			for(let i=0;i<4; i++){
+				if (deck[2][i]==2 && deck[1][i]==11){
+					deck[1][i]=1
+					return
+				}
+			}
 			win_p()
 		}
 	}
@@ -102,6 +120,12 @@ function random_carta(quem){
 		c_player_id++;
 		deck[2][carta_selecionada]=1;
 		if (contar("PLAYER")>21){
+			for(let i=0;i<4; i++){
+				if (deck[2][i]==1 && deck[1][i]==11){
+					deck[1][i]=1
+					return
+				}
+			}
 			stand()
 			win_d()
 
@@ -194,31 +218,50 @@ function dealer(){
 				random_carta("DEALER")
 				setTimeout(dealer,500)
 			}
+			else{
+				if (contar("PLAYER")==valor){
+					empate()
+				}
+				else if (contar("PLAYER")>valor){
+					win_p()
+				}
+				else{
+					win_d()
+				}
+			}
 		}
 
 	}
-}
-function reset(){
-	//para testar apenas
-	c_dealer.innerHTML="";
-	c_player.innerHTML="";
-	c_dealer_id=0;
-	c_player_id=0;
-	for (let i=0;i<52;i++){
-		deck[2][i]=0;
-	}
-	aposta_realizada()
 }
 
 //fim rodada
 let stop_dealer=false;
 function win_p(){
 	stop_dealer=true
-	console.log("player ganhou")
+	bootstrap.Modal.getOrCreateInstance(document.getElementById("win_modal")).show();
+	document.getElementById("win_start").innerHTML="Tinhas:"+(money+aposta);
+	document.getElementById("win_bet").innerHTML="Apostaste:"+aposta;
+	document.getElementById("win_end").innerHTML="Ficaste com:"+(money+2*aposta);
+	money+=aposta*2;
+	document.getElementById("money_display").innerHTML = money;
 }
 function win_d(){
-	console.log("dealer ganhou")
+	bootstrap.Modal.getOrCreateInstance(document.getElementById("lose_modal")).show();
+	if (money==0){
+		document.getElementById("lose_money").innerHTML="Ficaste sem dinheiro!"
+		document.getElementById("btn_continue_l").disabled=true;
+	}
+	else {
+		document.getElementById("lose_start").innerHTML="Tinhas:"+(money+aposta);
+		document.getElementById("lose_bet").innerHTML="Apostaste:"+aposta;
+		document.getElementById("lose_end").innerHTML="Ficaste com:"+money;
+	}
 }
 function empate(){
-	console.log("empate")
+	bootstrap.Modal.getOrCreateInstance(document.getElementById("draw_modal")).show();
+	document.getElementById("draw_start").innerHTML="Tinhas:"+(money+aposta);
+	document.getElementById("draw_bet").innerHTML="Apostaste:"+aposta;
+	document.getElementById("draw_end").innerHTML="Ficaste com:"+(money+aposta);
+	money+=aposta;
+	document.getElementById("money_display").innerHTML = money;
 }

@@ -31,6 +31,9 @@ img{
 #jogadas{
     gap: 1rem;
 }
-span{
+nav{
     color: white;
+}
+.resultado{
+    background: rgba(255, 255, 255, 0.6);
 }

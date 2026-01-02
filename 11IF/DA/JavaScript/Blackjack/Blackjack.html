@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="blackjack.css">
 </head>
 <body>
     <nav id="info_user" class="navbar fixed-top bg-danger" hidden="hidden">
         <div class="container-fluid">
-            <span class="navbar-brand">BLACKJACK</span>
+            <h3>BLACKJACK</h3>
             <div class="navbar-item">
                 <span class="navbar-item">USER:</span>
                 <span class="navbar-item" id="nome_display"></span>
@@ -19,35 +19,33 @@
                 <span class="navbar-item">MONEY:</span>
                 <span class="navbar-item" id="money_display">0</span>
             </div>
-
         </div>
     </nav>
     <div class="d-flex justify-content-center" id="div_comeco">
         <button class="btn_top btn btn-danger btn-lg" id="começar" data-bs-toggle="modal" data-bs-target="#escolherNome">Começar</button>
-        <div class="modal fade" id="escolherNome" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form class="modal-body needs-validation">
-                        <label for="Nome" class="form-label">Insira o seu nome</label>
-                        <input type="text" class="form-control" onchange=verifica_nome(this) id="Nome" required>
-                        <button type="button" id="close_nome" class="btn_top btn btn-danger">Escolher</button>
-                    </form>
-                </div>
+    </div>
+    <div class="modal fade" id="escolherNome" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="modal-body needs-validation">
+                    <label for="Nome" class="form-label">Insira o seu nome</label>
+                    <input type="text" class="form-control" onchange=verifica_nome(this) id="Nome" required>
+                    <button type="button" id="close_nome" class="btn_top btn btn-danger">Escolher</button>
+                </form>
             </div>
         </div>
-        <div class="modal fade" id="bet_div" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <label for="valor_bet">Quantidade a apostar</label>
-                        <input type="number" class="form-control" min="1" max="100" value="1" id="valor_bet" onchange="verifica_aposta(this)" hidden="hidden">
-                        <button class="btn_top btn btn-danger btn-lg" id="bet" onclick="aposta_realizada()" data-bs-dismiss="modal" hidden="hidden">Apostar</button>
-                    </div>
+    </div>
+    <div class="modal fade" id="bet_div" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <label for="valor_bet">Quantidade a apostar</label>
+                    <input type="number" class="form-control" min="1" max="100" value="1" id="valor_bet" onchange="verifica_aposta(this)">
+                    <button class="btn_top btn btn-danger btn-lg" id="bet" onclick="aposta_realizada()" data-bs-dismiss="modal">Apostar</button>
                 </div>
             </div>
         </div>
     </div>
-
     <div id="play" hidden="hidden">
         <div id="c_deck">
             <img alt="carta para baixo" src="images/0_back_card.png">
@@ -55,14 +53,67 @@
         <div id="c_dealer"></div>
         <div id="c_player"></div>
     </div>
+    <div class="modal fade" id="win_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content resultado">
+                <div class="modal-header resultado">
+                    <h1 class="modal-title fs-5">Ganhaste</h1>
+                </div>
+                <div class="modal-body resultado">
+                    <p id="win_start">Tinhas:</p>
+                    <p id="win_bet">Apostaste:</p>
+                    <p id="win_end">Ficaste com:</p>
+                </div>
+                <div class="modal-footer resultado">
+                    <button type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
+                    <button type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="lose_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content resultado">
+                <div class="modal-header resultado">
+                    <h1 class="modal-title fs-5">Perdeste</h1>
+                </div>
+                <div class="modal-body resultado" id="lose_money">
+                    <p id="lose_start">Tinhas:</p>
+                    <p id="lose_bet">Apostaste:</p>
+                    <p id="lose_end">Ficaste com:</p>
+                </div>
+                <div class="modal-footer resultado">
+                    <button  id="btn_continue_l" type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
+                    <button type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="draw_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content resultado">
+                <div class="modal-header resultado">
+                    <h1 class="modal-title fs-5">Empataste</h1>
+                </div>
+                <div class="modal-body resultado">
+                    <p id="draw_start">Tinhas:</p>
+                    <p id="draw_bet">Apostaste:</p>
+                    <p id="draw_end">Ficaste com:</p>
+                </div>
+                <div class="modal-footer resultado">
+                    <button type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
+                    <button type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="jogadas" hidden="hidden">
         <button class="btn btn-danger btn-lg" onclick=random_carta("PLAYER") id="hit">Hit</button>
         <button class="btn btn-danger btn-lg" onclick=stand_btn() id="stand">Stand</button>
         <button class="btn btn-danger btn-lg" onclick=split() id="split">Split</button>
         <button class="btn btn-danger btn-lg" onclick=double_down() id="double">Double Down</button>
-        <button onclick=reset()>reset</button>
     </div>
-    <script src="blackjack.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="blackjack.js"></script>
 </body>
 </html>
