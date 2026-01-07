@@ -18,14 +18,15 @@ img{
     padding-top: 10%;
 }
 #play{
-    height: 32rem;
-    padding: 5%;
+    height: 36rem;
+    padding: 5% 5% 0;
     display: grid;
-    grid-template: 40% 40% /20% 80%;
-    row-gap: 10%;
+    row-gap: 2%;
+    grid-template: 30% 30% 30% /20% 80%;
+
 }
 #c_deck{
-    grid-row-end: span 2;
+    grid-row-end: span 3;
     align-self: center;
 }
 #jogadas{
@@ -36,4 +37,12 @@ nav{
 }
 .resultado{
     background: rgba(255, 255, 255, 0.6);
+}
+@keyframes move_card {
+    from{transform: rotateY(0deg)}
+    to{transform: rotateY(180deg);}
+}
+.rotate_card{
+    animation: move_card 1s;
+    
 }

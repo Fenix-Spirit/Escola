@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="blackjack.css">
 </head>
 <body>
-    <nav id="info_user" class="navbar fixed-top bg-danger" hidden="hidden">
+    <nav id="info_user" class="navbar fixed-top bg-danger">
         <div class="container-fluid">
             <h3>BLACKJACK</h3>
             <div class="navbar-item">
@@ -52,6 +52,7 @@
         </div>
         <div id="c_dealer"></div>
         <div id="c_player"></div>
+        <div id="c_player_split"></div>
     </div>
     <div class="modal fade" id="win_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -84,7 +85,7 @@
                 </div>
                 <div class="modal-footer resultado">
                     <button  id="btn_continue_l" type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
-                    <button type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                    <button id="f5_lose" type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
                 </div>
             </div>
         </div>
@@ -99,6 +100,24 @@
                     <p id="draw_start">Tinhas:</p>
                     <p id="draw_bet">Apostaste:</p>
                     <p id="draw_end">Ficaste com:</p>
+                </div>
+                <div class="modal-footer resultado">
+                    <button type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
+                    <button type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="split_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content resultado">
+                <div class="modal-body resultado">
+                    <div id="split1">
+
+                    </div>
+                    <div id="split2">
+
+                    </div>
                 </div>
                 <div class="modal-footer resultado">
                     <button type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
