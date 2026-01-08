@@ -88,7 +88,7 @@ function aposta_realizada(){
 	document.getElementById("div_comeco").style.display="none";
 	document.getElementById("hit").disabled=false;
 	document.getElementById("stand").disabled=false;
-	document.getElementById("split").disabled=true;
+	document.getElementById("split").disabled=false;
 	document.getElementById("double").disabled=false;
 	stop_dealer=false;
 	random_carta("PLAYER")
@@ -99,9 +99,10 @@ function aposta_realizada(){
 	document.getElementById("c_dealer1").setAttribute("alt","carta para baixo")
 	if (aposta>money){
 		document.getElementById("double").disabled=true;
-		if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)==Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
-			document.getElementById("split").disabled=false;
-		}
+		document.getElementById("split").disabled=true;
+	}
+	if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)!=Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
+		document.getElementById("split").disabled=true;
 	}
 }
 //ações
@@ -233,7 +234,7 @@ function split(){
 	if (aposta>money){
 		document.getElementById("double").disabled=true;
 	}
-}//incompleto(mudar outras funções) alta dificuldade
+}
 function double_down(){
 	if (split_value && !split_2_turn){
 		money-=aposta;
@@ -330,6 +331,7 @@ function win_p(){
 		document.getElementById("win_bet").innerHTML="Apostaste:"+aposta;
 		document.getElementById("win_end").innerHTML="Ficaste com:"+(money+2*aposta);
 		money+=aposta*2;
+		document.getElementById("valor_bet").max=money;
 		document.getElementById("money_display").innerHTML = money;
 	}
 }
@@ -349,6 +351,7 @@ function win_d(){
 			document.getElementById("lose_bet").innerHTML="Apostaste:"+aposta;
 			document.getElementById("lose_end").innerHTML="Ficaste com:"+money;
 		}
+		document.getElementById("valor_bet").max=money;
 	}
 }
 function empate(){
@@ -362,6 +365,7 @@ function empate(){
 		document.getElementById("draw_end").innerHTML="Ficaste com:"+(money+aposta);
 		money+=aposta;
 		document.getElementById("money_display").innerHTML = money;
+		document.getElementById("valor_bet").max=money;
 	}
 }
 function resultados_split(){
@@ -404,5 +408,6 @@ function resultados_split(){
 		document.getElementById("split2").innerHTML="Ganhaste a segunda mão<br>Tinhas:"+(money+aposta_split)+"<br>Apostaste:"+aposta_split+"<br>Ficaste com:"+(money+2*aposta_split)+"<br>";
 		money+=(aposta*2);
 	}
+	document.getElementById("valor_bet").max=money;
 	document.getElementById("money_display").innerHTML = money;
 }

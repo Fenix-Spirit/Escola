@@ -1,6 +1,7 @@
 body{
     background-image: url("images/background.jpg");
     background-size: cover;
+    user-select: none;
 }
 img{
     max-width: 6rem;
@@ -44,5 +45,5 @@ nav{
 }
 .rotate_card{
     animation: move_card 1s;
-    
+
 }
