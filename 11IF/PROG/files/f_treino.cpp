@@ -6,7 +6,8 @@ struct {
 	int idade{};
 	int numero{};
 }alu;
-void inserir(){
+int count=0;
+/*void inserir(){
 	fstream file("alunos.txt",fstream::app);
 	cout<<"nome: ";
 	cin.ignore();
@@ -16,6 +17,22 @@ void inserir(){
 	cout<<"numero: ";
 	cin>>alu.numero;
 	file<<alu.nome<<" "<<alu.idade<<" "<<alu.numero<<endl;
+	file.close();
+}*/
+void inserir_v2(){
+	ifstream file_r("alunos.txt");
+	count=file_r.
+	count++;
+	file_r.close();
+	fstream file("alunos.txt",fstream::app);
+	cout<<"nome: ";
+	cin.ignore();
+	getline(cin,alu.nome);
+	cout<<"idade: ";
+	cin>>alu.idade;
+	cout<<"numero: ";
+	cin>>alu.numero;
+	file<<alu.nome<<" "<<alu.idade<<" "<<alu.numero<<" "<<count<<endl;
 	file.close();
 }
 void listar(){
@@ -35,7 +52,7 @@ int main(){
 		cin>>op;
 		switch (op){
 			case 1:
-				inserir();
+				inserir_v2();
 				break;
 			case 2:
 				listar();
