@@ -38,5 +38,3 @@ select * from encomendas order by valor asc;
 select count(*) from clientes;
 select sum(valor) from encomendas;
 select avg(valor) from encomendas;
-
-select
