@@ -2,22 +2,30 @@
 
 function verifica_nome(x){
 	if (x.value!="" && x.value[0]!=" "){
-		document.getElementById("close_nome").setAttribute("data-bs-dismiss","modal");
 		document.getElementById("close_nome").setAttribute("onclick","comecar()");
-		document.getElementById("close_nome").setAttribute("data-bs-toggle","modal");
-		document.getElementById("close_nome").setAttribute("data-bs-target","#bet_div");
+		document.getElementById("label_nome").innerHTML="Insira o seu nome";
+
 	}
 	else{
-		document.getElementById("close_nome").removeAttribute("data-bs-dismiss");
-		document.getElementById("close_nome").removeAttribute("data-bs-toggle");
 		document.getElementById("close_nome").removeAttribute("onclick");
-		document.getElementById("close_nome").removeAttribute("data-bs-target");
+		document.getElementById("label_nome").innerHTML="O seu nome não é válido escolha outro.";
 	}
 }
 function comecar(){
+	document.getElementById("sidebar").hidden=false;
 	let nome = document.getElementById("Nome").value;
-	document.getElementById("começar").hidden = true;
 	document.getElementById("nome_display").innerHTML=nome;
+	document.getElementById("play").hidden = false;
+	document.getElementById("jogadas").hidden = false;
+	document.getElementById("jogadas").classList.add("d-flex","justify-content-center");
+	document.getElementById("escolherNome").style.display="none";
+	document.getElementById("bet").disabled=false	;
+	document.getElementById("valor_bet").disabled=false;
+	document.getElementById("valor_bet").focus();
+	document.getElementById("hit").disabled=true;
+	document.getElementById("stand").disabled=true;
+	document.getElementById("split_btn").disabled=true;
+	document.getElementById("double").disabled=true;
 }
 //Dinheiro inicial
 
@@ -44,25 +52,30 @@ let c_player_id=0;
 let split_value=false
 let split_2_turn=false;
 let aposta_split=0
+document.getElementById("Nome").focus();
 function verifica_aposta(x){
 	if (x.value<=money && x.value>0 && parseInt(x.value) == x.value){
 		document.getElementById("bet").setAttribute("onclick","aposta_realizada()");
-		document.getElementById("bet").setAttribute("data-bs-dismiss","modal");
+		document.getElementById("label_bet").innerHTML="Quantidade a apostar";
 	}
 	else{
 		document.getElementById("bet").removeAttribute("onclick");
-		document.getElementById("bet").removeAttribute("data-bs-dismiss");
+		document.getElementById("label_bet").innerHTML="Insira uma aposta válida";
 	}
 }
 function aposta_modal(){
-	bootstrap.Modal.getOrCreateInstance(document.getElementById("win_modal")).hide();
-	bootstrap.Modal.getOrCreateInstance(document.getElementById("lose_modal")).hide();
-	bootstrap.Modal.getOrCreateInstance(document.getElementById("draw_modal")).hide();
-	bootstrap.Modal.getOrCreateInstance(document.getElementById("split_modal")).hide();
-	bootstrap.Modal.getOrCreateInstance(document.getElementById("bet_div")).show();
-
+	document.getElementById("resultados").hidden=true;
+	document.getElementById("win").hidden=true;
+	document.getElementById("lose").hidden=true;
+	document.getElementById("draw").hidden=true;
+	document.getElementById("split").hidden=true;
+	document.getElementById("bet").disabled=false	;
+	document.getElementById("valor_bet").disabled=false;
+	document.getElementById("valor_bet").focus();
 }
 function aposta_realizada(){
+	document.getElementById("bet").disabled=true;
+	document.getElementById("valor_bet").disabled=true;
 	c_dealer.innerHTML="";
 	c_player.innerHTML="";
 	c_split.innerHTML="";
@@ -81,14 +94,9 @@ function aposta_realizada(){
 	aposta=parseInt(document.getElementById("valor_bet").value)	;
 	money-=aposta;
 	document.getElementById("money_display").innerHTML = money;
-	document.getElementById("play").hidden = false;
-	document.getElementById("jogadas").hidden = false;
-	document.getElementById("jogadas").classList.add("d-flex","justify-content-center");
-	document.getElementById("div_comeco").classList.remove("d-flex","justify-content-center");
-	document.getElementById("div_comeco").style.display="none";
 	document.getElementById("hit").disabled=false;
 	document.getElementById("stand").disabled=false;
-	document.getElementById("split").disabled=false;
+	document.getElementById("split_btn").disabled=false;
 	document.getElementById("double").disabled=false;
 	stop_dealer=false;
 	random_carta("PLAYER")
@@ -99,10 +107,10 @@ function aposta_realizada(){
 	document.getElementById("c_dealer1").setAttribute("alt","carta para baixo")
 	if (aposta>money){
 		document.getElementById("double").disabled=true;
-		document.getElementById("split").disabled=true;
+		document.getElementById("split_btn").disabled=true;
 	}
 	if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)!=Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
-		document.getElementById("split").disabled=true;
+		document.getElementById("split_btn").disabled=false;
 	}
 }
 //ações
@@ -128,7 +136,7 @@ function random_carta(quem){
 	}
 	else if (quem=="PLAYER"){
 		if (c_player_id>=2){
-			document.getElementById("split").disabled=true;
+			document.getElementById("split_btn").disabled=true;
 		}
 		c_player.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_player"+c_player_id+"'>";
 		c_player_id++;
@@ -200,13 +208,17 @@ function stand(){
 	else {
 		document.getElementById("hit").disabled=true;
 		document.getElementById("stand").disabled=true;
-		document.getElementById("split").disabled=true;
+		document.getElementById("split_btn").disabled=true;
 		document.getElementById("double").disabled=true;
 		document.getElementById("c_dealer1").setAttribute("alt","carta para cima")
 		for (let i=0; i<52; i++){
 			if (deck[2][i]==2){
 				if (document.getElementById("c_dealer0").dataset.cardId!=i){
-					document.getElementById("c_dealer1").src=deck[0][i];
+					document.getElementById("c_dealer1").classList.add("rotate_card")
+					setTimeout(function(){
+						document.getElementById("c_dealer1").src=deck[0][i];
+						document.getElementById("c_dealer1").classList.remove("rotate_card");
+						},500)
 					break;
 				}
 			}
@@ -329,7 +341,8 @@ function win_p(){
 	}
 	else{
 		stop_dealer=true
-		bootstrap.Modal.getOrCreateInstance(document.getElementById("win_modal")).show();
+		document.getElementById("resultados").hidden=false;
+		document.getElementById("win").hidden=false;
 		document.getElementById("win_start").innerHTML="Tinhas:"+(money+aposta);
 		document.getElementById("win_bet").innerHTML="Apostaste:"+aposta;
 		document.getElementById("win_end").innerHTML="Ficaste com:"+(money+2*aposta);
@@ -344,10 +357,11 @@ function win_d(){
 		resultados_split()
 	}
 	else {
-		bootstrap.Modal.getOrCreateInstance(document.getElementById("lose_modal")).show();
+		document.getElementById("resultados").hidden=false;
+		document.getElementById("lose").hidden=false;
 		if (money==0){
 			document.getElementById("lose_money").innerHTML="Ficaste sem dinheiro!"
-			document.getElementById("btn_continue_l").disabled=true;
+			document.getElementById("btn_continue_l").hidden=true;
 			document.getElementById("f5_lose").innerHTML="Sair"
 		}
 		else {
@@ -364,7 +378,8 @@ function empate(){
 		resultados_split()
 	}
 	else {
-		bootstrap.Modal.getOrCreateInstance(document.getElementById("draw_modal")).show();
+		document.getElementById("resultados").hidden=false;
+		document.getElementById("draw").hidden=false;
 		document.getElementById("draw_start").innerHTML="Tinhas:"+(money+aposta);
 		document.getElementById("draw_bet").innerHTML="Apostaste:"+aposta;
 		document.getElementById("draw_end").innerHTML="Ficaste com:"+(money+aposta);
@@ -375,7 +390,8 @@ function empate(){
 	}
 }
 function resultados_split(){
-	bootstrap.Modal.getOrCreateInstance(document.getElementById("split_modal")).show();
+	document.getElementById("resultados").hidden=false;
+	document.getElementById("split").hidden=false;
 	//1ª jogada
 	if (contar("PLAYER")>21){
 		document.getElementById("split1").innerHTML="Perdeste a primeira mão<br>Tinhas:"+(money+aposta+aposta_split)+"<br>Apostaste:"+aposta+"<br>Ficaste com:"+(money+aposta_split)+"<br>";
@@ -413,6 +429,12 @@ function resultados_split(){
 	else if (contar("SPLIT")>contar("DEALER")){
 		document.getElementById("split2").innerHTML="Ganhaste a segunda mão<br>Tinhas:"+(money+aposta_split)+"<br>Apostaste:"+aposta_split+"<br>Ficaste com:"+(money+2*aposta_split)+"<br>";
 		money+=(aposta_split*2);
+	}
+	if (money==0){
+		document.getElementById("split1").innerHTML="Ficaste sem dinheiro!";
+		document.getElementById("split2").innerHTML="";
+		document.getElementById("btn_continue_split").hidden=true;
+		document.getElementById("f5_split").innerHTML="Sair"
 	}
 	document.getElementById("valor_bet").max=money;
 	document.getElementById("money_display").innerHTML = money;
