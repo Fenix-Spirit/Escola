@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="blackjack.css">
+</head>
+<body>
+    <nav id="info_user" class="navbar fixed-top bg-danger">
+        <div class="container-fluid">
+            <h3>BLACKJACK</h3>
+            <div class="navbar-item">
+                <span class="navbar-item">USER:</span>
+                <span class="navbar-item" id="nome_display"></span>
+            </div>
+        </div>
+    </nav>
+    <div id="sidebar" hidden="hidden">
+        <div>
+            <span class="white_txt">MONEY:</span>
+            <span class="white_txt" id="money_display">0</span>
+        </div>
+        <div id="bet_div">
+            <label for="valor_bet" id="label_bet">Quantidade a apostar</label>
+            <input type="number" class="form-control" min="1" max="100" value="1" id="valor_bet" disabled oninput="verifica_aposta(this)">
+            <button class="btn btn-danger btn-lg" id="bet" onclick="aposta_realizada()" disabled>Apostar</button>
+        </div>
+        <div id="resultados" hidden="hidden">
+            <div id="win" hidden="hidden">
+                <div>
+                    <h1>Ganhaste</h1>
+                </div>
+                <div>
+                    <p id="win_start">Tinhas:</p>
+                    <p id="win_bet">Apostaste:</p>
+                    <p id="win_end">Ficaste com:</p>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
+                    <button type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                </div>
+            </div>
+            <div id="lose" hidden="hidden">
+                <div>
+                    <h1 class="modal-title fs-5">Perdeste</h1>
+                </div>
+                <div id="lose_money">
+                    <p id="lose_start">Tinhas:</p>
+                    <p id="lose_bet">Apostaste:</p>
+                    <p id="lose_end">Ficaste com:</p>
+                </div>
+                <div>
+                    <button  id="btn_continue_l" type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
+                    <button id="f5_lose" type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                </div>
+            </div>
+            <div id="draw" hidden="hidden">
+                <div>
+                    <h1>Empataste</h1>
+                </div>
+                <div>
+                    <p id="draw_start">Tinhas:</p>
+                    <p id="draw_bet">Apostaste:</p>
+                    <p id="draw_end">Ficaste com:</p>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
+                    <button type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                </div>
+            </div>
+            <div id="split" hidden="hidden">
+                <div>
+                    <div id="split1">
+
+                    </div>
+                    <div id="split2">
+
+                    </div>
+                </div>
+                <div>
+                    <button id="btn_continue_split" type="button" class="btn btn-danger" onclick=aposta_modal()>Continuar</button>
+                    <button id="f5_split" type="button" class="btn btn-danger" onclick="location.reload()">Desistir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="escolherNome">
+        <label for="Nome" id="label_nome">Insira o seu nome</label>
+        <input type="text" oninput="verifica_nome(this)" id="Nome">
+        <button type="button" id="close_nome" class="btn btn-danger">Escolher</button>
+    </div>
+    <div id="play" hidden="hidden">
+        <div id="c_deck">
+            <img alt="carta para baixo" src="images/0_back_card.png">
+        </div>
+        <div id="c_dealer"></div>
+        <div id="c_player"></div>
+        <div id="c_player_split"></div>
+    </div>
+    <div id="jogadas" hidden="hidden">
+        <button class="btn btn-danger btn-lg" onclick=random_carta("PLAYER") id="hit">Hit</button>
+        <button class="btn btn-danger btn-lg" onclick=stand_btn() id="stand">Stand</button>
+        <button class="btn btn-danger btn-lg" onclick=split() id="split_btn">Split</button>
+        <button class="btn btn-danger btn-lg" onclick=double_down() id="double">Double Down</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="blackjack.js"></script>
+</body>
+</html>
