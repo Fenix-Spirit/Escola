@@ -110,7 +110,7 @@ function aposta_realizada(){
 		document.getElementById("split_btn").disabled=true;
 	}
 	if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)!=Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
-		document.getElementById("split_btn").disabled=false;
+		document.getElementById("split_btn").disabled=true;
 	}
 }
 //ações
@@ -231,7 +231,7 @@ function stand_btn(){
 	}
 	else{
 		stand();
-		setTimeout(dealer,500)
+		setTimeout(dealer,2000)
 	}
 }
 function split(){
