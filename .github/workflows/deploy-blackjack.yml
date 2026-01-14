@@ -1,0 +1,46 @@
+name: Deploy Blackjack to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]           # ← change to your default branch if different (e.g. master)
+  workflow_dispatch:             # allows manual trigger from Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-blackjack"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Choose ONE of these depending on your situation:
+
+          # Option A: if you have a build step that creates a 'dist'/'build'/'out' folder
+          path: ./11IF/DA/JavaScript/Blackjack/dist
+
+          # Option B: if your ready-to-serve files are directly in the Blackjack folder
+          # (most common for simple vanilla JS projects)
+          # path: ./11IF/DA/JavaScript/Blackjack
+
+          # Option C: if build creates 'build' instead
+          # path: ./11IF/DA/JavaScript/Blackjack/build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+    # Optional: show the live URL in the workflow summary
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
