@@ -40,6 +40,6 @@ insert into vendas(id_album) values
     (2),
     (4);
 
-select albun_titulo,artista_nome from albuns inner join artistas on albuns.id_artista = artistas.artistas_id;
+select albun_titulo,artista_nome from albuns inner join artistas on albuns.id_artista = artistas.artistas_id where id_artista=4;
 select * from vendas inner join albuns on vendas.id_album = albuns.albun_id;
 select count(venda_id) from vendas;
