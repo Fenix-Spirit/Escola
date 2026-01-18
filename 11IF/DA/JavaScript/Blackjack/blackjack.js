@@ -74,6 +74,10 @@ function aposta_modal(){
 	document.getElementById("valor_bet").focus();
 }
 function aposta_realizada(){
+	cont_ani=0;
+	intervalo_m=[]
+	pos_x=[];
+	pos_y=[];
 	document.getElementById("bet").disabled=true;
 	document.getElementById("valor_bet").disabled=true;
 	c_dealer.innerHTML="";
@@ -139,6 +143,7 @@ function random_carta(quem){
 			document.getElementById("split_btn").disabled=true;
 		}
 		c_player.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_player"+c_player_id+"'>";
+		move_card("PLAYER",document.getElementById("c_player"+c_player_id));
 		c_player_id++;
 		deck[2][carta_selecionada]=1;
 		if (contar("PLAYER")>21){
@@ -214,11 +219,10 @@ function stand(){
 		for (let i=0; i<52; i++){
 			if (deck[2][i]==2){
 				if (document.getElementById("c_dealer0").dataset.cardId!=i){
-					document.getElementById("c_dealer1").classList.add("rotate_card")
-					setTimeout(function(){
+					rotate_card()
+					setTimeout(function (){
 						document.getElementById("c_dealer1").src=deck[0][i];
-						document.getElementById("c_dealer1").classList.remove("rotate_card");
-						},500)
+					},450)
 					break;
 				}
 			}
@@ -439,4 +443,52 @@ function resultados_split(){
 	document.getElementById("valor_bet").max=money;
 	document.getElementById("money_display").innerHTML = money;
 	verifica_aposta(document.getElementById("valor_bet"))
+}
+//animações
+function rotate_card(){
+	let carta=document.getElementById("c_dealer1");
+	let angulo=0;
+	let change=false;
+	let intervalo_r=setInterval(function(){
+		if (angulo==90){
+			change=true;
+		}
+		if (change){
+			angulo--;
+			carta.style.transform="rotateY("+angulo+"deg)";
+		}
+		else {
+			angulo++;
+			carta.style.transform="rotateY("+angulo+"deg)";
+		}
+		if (angulo==0){
+			clearInterval(intervalo_r);
+		}
+	},5)
+}
+let intervalo_m=new Array(0);
+let pos_x=new Array(0);
+let pos_y=new Array(0);
+let cont_ani=0;
+function move_card(quem,carta){
+	const ani_index=cont_ani;
+	cont_ani++;
+	if (quem=="PLAYER"){
+		pos_x.push(20+(6.1*c_player_id));
+		intervalo_m.push(setInterval(function(){
+			if (pos_x[ani_index]<=0){
+				clearInterval(intervalo_m[ani_index])
+			}
+			else {
+				pos_x[ani_index]-=0.3;
+				carta.style.transform="translateX("+(-pos_x[ani_index])+"rem)";
+			}
+		},1))
+	}
+	else if (quem=="DEALER"){
+
+	}
+	else if (quem=="SPLIT"){
+
+	}
 }
