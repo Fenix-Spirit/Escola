@@ -49,6 +49,7 @@ const c_player=document.getElementById("c_player");
 const c_split=document.getElementById("c_player_split");
 let c_dealer_id=0;
 let c_player_id=0;
+let c_split_id=0;
 let split_value=false
 let split_2_turn=false;
 let aposta_split=0
@@ -85,6 +86,7 @@ function aposta_realizada(){
 	c_split.innerHTML="";
 	c_dealer_id=0;
 	c_player_id=0;
+	c_split_id=0;
 	for (let i=0;i<52;i++){
 		deck[2][i]=0;
 	}
@@ -114,7 +116,7 @@ function aposta_realizada(){
 		document.getElementById("split_btn").disabled=true;
 	}
 	if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)!=Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
-		document.getElementById("split_btn").disabled=true;
+		document.getElementById("split_btn").disabled=false;
 	}
 }
 //ações
@@ -125,6 +127,7 @@ function random_carta(quem){
 	}
 	if (quem=="DEALER"){
 		c_dealer.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_dealer"+c_dealer_id+"'>";
+		move_card("DEALER",document.getElementById("c_dealer"+c_dealer_id));
 		c_dealer_id++;
 		deck[2][carta_selecionada]=2;
 		if (contar("DEALER")>21){
@@ -163,8 +166,9 @@ function random_carta(quem){
 		}
 	}
 	else if (quem=="SPLIT"){
-		c_split.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima'>";
-		c_player_id++;
+		c_split.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_split"+c_split_id+"'>";
+		move_card("SPLIT",document.getElementById("c_split"+c_split_id));
+		c_split_id++;
 		deck[2][carta_selecionada]=3;
 		if (contar("SPLIT")>21){
 			for(let i=0;i<4; i++){
@@ -244,9 +248,11 @@ function split(){
 	document.getElementById("money_display").innerHTML = money;
 	split_value=true;
 	split_2_turn=false;
-	c_split.innerHTML+="<img src='"+deck[0][document.getElementById("c_player1").dataset.cardId]+"' data-card-id='"+document.getElementById("c_player1").dataset.cardId+"' alt='carta para cima'>";
+	c_split.innerHTML+="<img src='"+deck[0][document.getElementById("c_player1").dataset.cardId]+"' data-card-id='"+document.getElementById("c_player1").dataset.cardId+"' alt='carta para cima' id='c_split"+c_split_id+"'>";
+	c_split_id++
 	deck[2][document.getElementById("c_player1").dataset.cardId]=3
 	document.getElementById("c_player1").remove()
+	split_move();
 	setTimeout(function (){random_carta("PLAYER");random_carta("SPLIT");},1000)
 	if (aposta>money){
 		document.getElementById("double").disabled=true;
@@ -475,9 +481,11 @@ function move_card(quem,carta){
 	cont_ani++;
 	if (quem=="PLAYER"){
 		pos_x.push(20+(6.1*c_player_id));
+		pos_y.push(0);
 		intervalo_m.push(setInterval(function(){
 			if (pos_x[ani_index]<=0){
 				clearInterval(intervalo_m[ani_index])
+				carta.style.transform="translate(0,0)"
 			}
 			else {
 				pos_x[ani_index]-=0.3;
@@ -486,9 +494,61 @@ function move_card(quem,carta){
 		},1))
 	}
 	else if (quem=="DEALER"){
-
+		pos_x.push(20+(6.1*c_dealer_id));
+		pos_y.push(11.1);
+		intervalo_m.push(setInterval(function(){
+			if (pos_x[ani_index]<=0 && pos_y[ani_index]<=0){
+				clearInterval(intervalo_m[ani_index])
+				carta.style.transform="translate(0,0)"
+			}
+			else {
+				if (pos_x[ani_index]>0){
+					pos_x[ani_index]-=0.3;
+				}
+				if (pos_y[ani_index]>0){
+					pos_y[ani_index]-=0.15;
+				}
+				carta.style.transform="translate("+(-pos_x[ani_index])+"rem,"+pos_y[ani_index]+"rem)";
+			}
+		},1))
 	}
 	else if (quem=="SPLIT"){
-
+		pos_x.push(20+(6.1*c_split_id));
+		pos_y.push(-11.1);
+		intervalo_m.push(setInterval(function(){
+			if (pos_x[ani_index]<=0 && pos_y[ani_index]>=0){
+				clearInterval(intervalo_m[ani_index])
+				carta.style.transform="translate(0,0)"
+			}
+			else {
+				if (pos_x[ani_index]>0){
+					pos_x[ani_index]-=0.3;
+				}
+				if (pos_y[ani_index]<0){
+					pos_y[ani_index]+=0.15;
+				}
+				carta.style.transform="translate("+(-pos_x[ani_index])+"rem,"+pos_y[ani_index]+"rem)";
+			}
+		},1))
 	}
+}
+function split_move(){
+	let carta=document.getElementById("c_split0")
+	let pos_x=6.1;
+	let pos_y=-11.1;
+	let intervalo_s=setInterval(function(){
+		if (pos_x<=0 && pos_y>=0){
+			clearInterval(intervalo_s)
+			carta.style.transform="translate(0,0)"
+		}
+		else{
+			if (pos_x>0){
+				pos_x-=0.1;
+			}
+			if (pos_y<0){
+				pos_y+=0.2;
+			}
+			carta.style.transform="translate("+pos_x+"rem,"+pos_y+"rem)"
+		}
+	},1)
 }
