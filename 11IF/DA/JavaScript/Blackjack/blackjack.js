@@ -116,7 +116,7 @@ function aposta_realizada(){
 		document.getElementById("split_btn").disabled=true;
 	}
 	if (Math.floor(document.getElementById("c_player0").dataset.cardId/4)!=Math.floor(document.getElementById("c_player1").dataset.cardId/4)){
-		document.getElementById("split_btn").disabled=false;
+		document.getElementById("split_btn").disabled=true;
 	}
 }
 //ações
@@ -126,42 +126,84 @@ function random_carta(quem){
 		carta_selecionada=Math.floor(Math.random()*52)
 	}
 	if (quem=="DEALER"){
-		c_dealer.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_dealer"+c_dealer_id+"'>";
-		move_card("DEALER",document.getElementById("c_dealer"+c_dealer_id));
-		c_dealer_id++;
-		deck[2][carta_selecionada]=2;
-		if (contar("DEALER")>21){
-			for(let i=0;i<4; i++){
-				if (deck[2][i]==2 && deck[1][i]==11){
-					deck[1][i]=1
-					return
+		if (c_dealer_id==0){
+			c_dealer.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_dealer"+c_dealer_id+"'>";
+			c_dealer_id++;
+			deck[2][carta_selecionada]=2;
+			let pos_x=20+(6.1*c_dealer_id);
+			let pos_y=11.1;
+			let intervalo=setInterval(function(){
+				if (pos_x<=0 && pos_y<=0){
+					clearInterval(intervalo)
+					document.getElementById("c_dealer0").style.transform="translate(0,0)"
 				}
+				else {
+					if (pos_x>0){
+						pos_x-=0.3;
+					}
+					if (pos_y>0){
+						pos_y-=0.15;
+					}
+					document.getElementById("c_dealer0").style.transform="translate("+(-pos_x)+"rem,"+pos_y+"rem)";
+				}
+			},1)
+		}
+		else{
+			c_dealer.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_dealer"+c_dealer_id+"'>";
+			move_card("DEALER",document.getElementById("c_dealer"+c_dealer_id));
+			c_dealer_id++;
+			deck[2][carta_selecionada]=2;
+			if (contar("DEALER")>21){
+				for(let i=0;i<4; i++){
+					if (deck[2][i]==2 && deck[1][i]==11){
+						deck[1][i]=1
+						return
+					}
+				}
+				stop_dealer=true;
+				win_p()
 			}
-			stop_dealer=true;
-			win_p()
 		}
 	}
 	else if (quem=="PLAYER"){
 		if (c_player_id>=2){
 			document.getElementById("split_btn").disabled=true;
 		}
-		c_player.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_player"+c_player_id+"'>";
-		move_card("PLAYER",document.getElementById("c_player"+c_player_id));
-		c_player_id++;
-		deck[2][carta_selecionada]=1;
-		if (contar("PLAYER")>21){
-			for(let i=0;i<4; i++){
-				if (deck[2][i]==1 && deck[1][i]==11){
-					deck[1][i]=1
-					return
+		if (c_player_id==0){
+			c_player.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_player"+c_player_id+"'>";
+			c_player_id++;
+			deck[2][carta_selecionada]=1;
+			let pos_x=20+(6.1*c_player_id);
+			let intervalo=setInterval(function(){
+				if (pos_x<=0){
+					clearInterval(intervalo)
+					document.getElementById("c_player0").style.transform="translate(0,0)"
 				}
-			}
-			if (split_value){
-				stand()
-			}
-			else {
-				stand()
-				win_d()
+				else {
+					pos_x-=0.3;
+					document.getElementById("c_player0").style.transform="translateX("+(-pos_x)+"rem)";
+				}
+			},1)
+		}
+		else {
+			c_player.innerHTML+="<img src='"+deck[0][carta_selecionada]+"' data-card-id='"+carta_selecionada+"' alt='carta para cima' id='c_player"+c_player_id+"'>";
+			move_card("PLAYER",document.getElementById("c_player"+c_player_id));
+			c_player_id++;
+			deck[2][carta_selecionada]=1;
+			if (contar("PLAYER")>21){
+				for(let i=0;i<4; i++){
+					if (deck[2][i]==1 && deck[1][i]==11){
+						deck[1][i]=1
+						return
+					}
+				}
+				if (split_value){
+					stand()
+				}
+				else {
+					stand()
+					win_d()
+				}
 			}
 		}
 	}
