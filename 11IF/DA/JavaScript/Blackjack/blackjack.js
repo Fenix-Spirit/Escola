@@ -1,5 +1,4 @@
 //Nome e começo
-
 function verifica_nome(x){
 	if (x.value!="" && x.value[0]!=" "){
 		document.getElementById("close_nome").setAttribute("onclick","comecar()");
@@ -12,6 +11,7 @@ function verifica_nome(x){
 	}
 }
 function comecar(){
+	document.getElementById("background_music").play()
 	document.getElementById("sidebar").hidden=false;
 	let nome = document.getElementById("Nome").value;
 	document.getElementById("nome_display").innerHTML=nome;
