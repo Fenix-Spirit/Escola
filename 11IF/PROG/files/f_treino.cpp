@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace std;
 struct {
 	string nome;
@@ -40,8 +41,6 @@ struct {
 }*/
 void inserir_v3(){
 	string linha;
-
-
 	cout<<"nome: ";
 	cin.ignore();
 	getline(cin,alu.nome);
@@ -80,37 +79,95 @@ void listar(){
 	cout<<endl;
 }
 void alterar(){
+	vector<string> texto;
 	cout<<"numero:";
 	cin>>alu.numero;
 	string linha;
-	bool found=true;
-	while (found==true){
-		found=false;
-		ifstream file_r("alunos.txt");
-		while (getline(file_r,linha)){
-			if (alu.numero==stoi(linha.substr(linha.rfind(" ")+1,to_string(alu.numero).size()))){
-				found=true;
-				break;
-			}
-		}
-		file_r.close();
-		if (found){
-			fstream file("alunos.txt");
-
-
-
-
-			file.close();
+	int cont=0;
+	int pos;
+	bool found=false;
+	ifstream file_r("alunos.txt");
+	while (getline(file_r,linha)){
+		if (alu.numero==stoi(linha.substr(linha.rfind(" ")+1,to_string(alu.numero).size()))){
+			found=true;
+			pos=cont;
 		}
 		else{
-			cout<<"numero nao encontrado"<<endl;
+			texto.push_back(linha);
 		}
+		cont++;
+	}
+	file_r.close();
+	if (found==true){
+		cout<<"nome: ";
+		cin.ignore();
+		getline(cin,alu.nome);
+		cout<<"idade: ";
+		cin>>alu.idade;
+		fstream file("alunos.txt",fstream::out);
+		if (pos!=0){
+			file<<texto[0]<<endl;
+		}
+		else{
+			file<<alu.nome<<" "<<alu.idade<<" "<<alu.numero<<endl;
+		}
+		file.close();
+		file.open("alunos.txt",fstream::app);
+		for (int i=1;i<cont+1;i++){
+			if (i==pos){
+				file<<alu.nome<<" "<<alu.idade<<" "<<alu.numero<<endl;
+			}
+			else{
+				file<<texto[i]<<endl;
+			}
+		}
+		file.close();
+	}
+	else{
+		cout<<"numero nao encontrado"<<endl;
+	}
+}
+void eliminar(){
+	vector<string> texto;
+	cout<<"numero:";
+	cin>>alu.numero;
+	string linha;
+	int cont=0;
+	bool found=false;
+	ifstream file_r("alunos.txt");
+	while (getline(file_r,linha)){
+		cont++;
+		if (alu.numero==stoi(linha.substr(linha.rfind(" ")+1,to_string(alu.numero).size()))){
+			found=true;
+		}
+		else{
+			texto.push_back(linha);
+		}
+	}
+	file_r.close();
+	if (found==true){
+		fstream file("alunos.txt",fstream::out);
+		file<<texto[0]<<endl;
+		file.close();
+		file.open("alunos.txt",fstream::app);
+		for (int i=1;i<texto.size();i++){
+			if (i==cont){
+				file<<alu.nome<<" "<<alu.idade<<" "<<alu.numero<<endl;
+			}
+			else{
+				file<<texto[i]<<endl;
+			}
+		}
+		file.close();
+	}
+	else{
+		cout<<"numero nao encontrado"<<endl;
 	}
 }
 int main(){
 	int op=-1;
 	while(op!=0){
-		cout<<"MENU"<<endl<<"1.INSERIR"<<endl<<"2.LISTAR"<<endl<<"3.ALTERAR"<<endl<<"0. FIM"<<endl;
+		cout<<"MENU"<<endl<<"1.INSERIR"<<endl<<"2.LISTAR"<<endl<<"3.ALTERAR"<<endl<<"4.ELIMINAR"<<endl<<"0. FIM"<<endl;
 		cin>>op;
 		switch (op){
 			case 1:
@@ -121,6 +178,9 @@ int main(){
 				break;
 			case 3:
 				alterar();
+				break;
+			case 4:
+				eliminar();
 				break;
 			default:break;
 		}
