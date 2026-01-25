@@ -115,7 +115,7 @@ void ex_4(){
 	cout<<soma/precos.size();
 }
 void ex_5(){
-	
+
 }
 
 int main(){
