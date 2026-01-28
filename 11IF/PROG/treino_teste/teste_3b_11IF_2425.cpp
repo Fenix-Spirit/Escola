@@ -32,7 +32,7 @@ void ex_1(){
 	concerto.num=cont+1;
 	file_r.close();
 	fstream file("concertos.txt",fstream::app);
-	file<<concerto.num<<concerto.nome_banda<<" "<<concerto.dia<<" "<<concerto.mes<<" "<<concerto.ano<<" "<<concerto.preco<<endl;
+	file<<concerto.num<<" "<<concerto.nome_banda<<" "<<concerto.dia<<" "<<concerto.mes<<" "<<concerto.ano<<" "<<concerto.preco<<endl;
 	file.close();
 
 }
@@ -108,14 +108,76 @@ void ex_4(){
 	while (getline(file_r,linha)){
 		precos.push_back(stof(linha.substr(linha.rfind(" ")+1,linha.size())));
 	}
+	file_r.close();
 	float soma=0;
 	for (float i : precos){
 		soma+=i;
 	}
-	cout<<soma/precos.size();
+	float media=soma/precos.size();
+	ifstream file_r2("concertos.txt");
+	while (getline(file_r2,linha)){
+		if (stof(linha.substr(linha.rfind(" ")+1,linha.size()))>media){
+			cout<<linha<<endl;
+		}
+	}
+
 }
 void ex_5(){
-
+	int id_concertos_trocar[2];
+	cout<<"Num do 1 concerto a trocar: ";
+	cin>>id_concertos_trocar[0];
+	cout<<"Num do 2 concerto a trocar: ";
+	cin>>id_concertos_trocar[1];
+	ifstream file_r("concertos.txt");
+	string linha;
+	string linhas_trocar[2];
+	while (getline(file_r,linha)){
+		int count=0;
+		for (char c:linha){
+			if (c==' '){
+				count++;
+			}
+			if (count==2){
+				break;
+			}
+		}
+		if (linha.substr(0,linha.find(" "))==to_string(id_concertos_trocar[0])){
+			linhas_trocar[0]=linha.substr(0,count);
+			linhas_trocar[1]=linha.substr(count+1);
+		}
+		else if (linha.substr(0,linha.find(" "))==to_string(id_concertos_trocar[1])){
+			linhas_trocar[1].insert(0,linha.substr(0,count));
+			linhas_trocar[0]+=linha.substr(count+1);
+		}
+	}
+	file_r.close();
+	vector<string> linhas_file;
+	ifstream file_r2("concertos.txt");
+	while (getline(file_r2,linha)){
+		linhas_file.push_back(linha);
+	}
+	file_r2.close();
+	fstream file("concertos.txt",fstream::out);
+	if (id_concertos_trocar[0]==1){
+		file<<linhas_trocar[0]<<endl;
+	}
+	else{
+		file<<linhas_file[0];
+	}
+	file.close();
+	//erro gggggggggggggggggggggggggggggggggg
+	fstream file2("concertos.txt",fstream::app);
+	for (int i=1;i<linhas_file.size();){
+		if (i==id_concertos_trocar[0]-1){
+			file2<<linhas_trocar[0]<<endl;
+		}
+		else if (i==id_concertos_trocar[1]-1){
+			file2<<linhas_trocar[1]<<endl;
+		}
+		else{
+			file2<<linhas_file[i]<<endl;
+		}
+	}
 }
 
 int main(){
